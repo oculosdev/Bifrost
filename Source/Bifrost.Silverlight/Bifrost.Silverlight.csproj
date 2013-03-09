@@ -252,17 +252,41 @@
     <Compile Include="..\Bifrost\Configuration\ViewsConfiguration.cs">
       <Link>Configuration\ViewsConfiguration.cs</Link>
     </Compile>
+    <Compile Include="..\Bifrost\Domain\AccessingAggregateRoot.cs">
+      <Link>Domain\AccessingAggregateRoot.cs</Link>
+    </Compile>
     <Compile Include="..\Bifrost\Domain\AggregateRoot.cs">
       <Link>Domain\AggregateRoot.cs</Link>
     </Compile>
     <Compile Include="..\Bifrost\Domain\AggregateRootRepository.cs">
       <Link>Domain\AggregateRootRepository.cs</Link>
     </Compile>
+    <Compile Include="..\Bifrost\Domain\AggregateRootSecurityContext.cs">
+      <Link>Domain\AggregateRootSecurityContext.cs</Link>
+    </Compile>
+    <Compile Include="..\Bifrost\Domain\AggregateRootSecurityExtensions.cs">
+      <Link>Domain\AggregateRootSecurityExtensions.cs</Link>
+    </Compile>
+    <Compile Include="..\Bifrost\Domain\AggregateRootSecurityManager.cs">
+      <Link>Domain\AggregateRootSecurityManager.cs</Link>
+    </Compile>
+    <Compile Include="..\Bifrost\Domain\AggregateRootSecurityTarget.cs">
+      <Link>Domain\AggregateRootSecurityTarget.cs</Link>
+    </Compile>
+    <Compile Include="..\Bifrost\Domain\AggregateRootTracker.cs">
+      <Link>Domain\AggregateRootTracker.cs</Link>
+    </Compile>
     <Compile Include="..\Bifrost\Domain\IAggregateRoot.cs">
       <Link>Domain\IAggregateRoot.cs</Link>
     </Compile>
     <Compile Include="..\Bifrost\Domain\IAggregateRootRepository.cs">
       <Link>Domain\IAggregateRootRepository.cs</Link>
+    </Compile>
+    <Compile Include="..\Bifrost\Domain\IAggregateRootSecurityManager.cs">
+      <Link>Domain\IAggregateRootSecurityManager.cs</Link>
+    </Compile>
+    <Compile Include="..\Bifrost\Domain\IAggregateTracker.cs">
+      <Link>Domain\IAggregateTracker.cs</Link>
     </Compile>
     <Compile Include="..\Bifrost\Domain\IDynamicOriginator.cs">
       <Link>Domain\IDynamicOriginator.cs</Link>
@@ -278,6 +302,9 @@
     </Compile>
     <Compile Include="..\Bifrost\Domain\MissingAggregateRootException.cs">
       <Link>Domain\MissingAggregateRootException.cs</Link>
+    </Compile>
+    <Compile Include="..\Bifrost\Domain\UnauthorizedAccessToAggregateRootException.cs">
+      <Link>Domain\UnauthorizedAccessToAggregateRootException.cs</Link>
     </Compile>
     <Compile Include="..\Bifrost\Dynamic\DynamicHelpers.cs">
       <Link>Dynamic\DynamicHelpers.cs</Link>
@@ -531,6 +558,9 @@
     <Compile Include="..\Bifrost\Lifecycle\IUnitOfWork.cs">
       <Link>Lifecycle\IUnitOfWork.cs</Link>
     </Compile>
+    <Compile Include="..\Bifrost\Principal\CurrentPrincipal.cs">
+      <Link>Principal\CurrentPrincipal.cs</Link>
+    </Compile>
     <Compile Include="..\Bifrost\Properties\AssemblyInfo.cs">
       <Link>Properties\AssemblyInfo.cs</Link>
     </Compile>
@@ -615,6 +645,108 @@
     <Compile Include="..\Bifrost\Sagas\State.cs">
       <Link>Sagas\State.cs</Link>
     </Compile>
+    <Compile Include="..\Bifrost\Security\AuthorizationResult.cs">
+      <Link>Security\AuthorizationResult.cs</Link>
+    </Compile>
+    <Compile Include="..\Bifrost\Security\AuthorizeActionResult.cs">
+      <Link>Security\AuthorizeActionResult.cs</Link>
+    </Compile>
+    <Compile Include="..\Bifrost\Security\AuthorizeActorResult.cs">
+      <Link>Security\AuthorizeActorResult.cs</Link>
+    </Compile>
+    <Compile Include="..\Bifrost\Security\AuthorizeDescriptorResult.cs">
+      <Link>Security\AuthorizeDescriptorResult.cs</Link>
+    </Compile>
+    <Compile Include="..\Bifrost\Security\AuthorizeSecurableResult.cs">
+      <Link>Security\AuthorizeSecurableResult.cs</Link>
+    </Compile>
+    <Compile Include="..\Bifrost\Security\AuthorizeTargetResult.cs">
+      <Link>Security\AuthorizeTargetResult.cs</Link>
+    </Compile>
+    <Compile Include="..\Bifrost\Security\BaseSecurityDescriptor.cs">
+      <Link>Security\BaseSecurityDescriptor.cs</Link>
+    </Compile>
+    <Compile Include="..\Bifrost\Security\ISecurable.cs">
+      <Link>Security\ISecurable.cs</Link>
+    </Compile>
+    <Compile Include="..\Bifrost\Security\ISecurityAction.cs">
+      <Link>Security\ISecurityAction.cs</Link>
+    </Compile>
+    <Compile Include="..\Bifrost\Security\ISecurityActor.cs">
+      <Link>Security\ISecurityActor.cs</Link>
+    </Compile>
+    <Compile Include="..\Bifrost\Security\ISecurityCondition.cs">
+      <Link>Security\ISecurityCondition.cs</Link>
+    </Compile>
+    <Compile Include="..\Bifrost\Security\ISecurityContext.cs">
+      <Link>Security\ISecurityContext.cs</Link>
+    </Compile>
+    <Compile Include="..\Bifrost\Security\ISecurityDescriptor.cs">
+      <Link>Security\ISecurityDescriptor.cs</Link>
+    </Compile>
+    <Compile Include="..\Bifrost\Security\ISecurityDescriptorBuilder.cs">
+      <Link>Security\ISecurityDescriptorBuilder.cs</Link>
+    </Compile>
+    <Compile Include="..\Bifrost\Security\ISecurityManager.cs">
+      <Link>Security\ISecurityManager.cs</Link>
+    </Compile>
+    <Compile Include="..\Bifrost\Security\ISecurityRule.cs">
+      <Link>Security\ISecurityRule.cs</Link>
+    </Compile>
+    <Compile Include="..\Bifrost\Security\ISecurityRuleBuilder.cs">
+      <Link>Security\ISecurityRuleBuilder.cs</Link>
+    </Compile>
+    <Compile Include="..\Bifrost\Security\ISecurityTarget.cs">
+      <Link>Security\ISecurityTarget.cs</Link>
+    </Compile>
+    <Compile Include="..\Bifrost\Security\NamespaceSecurable.cs">
+      <Link>Security\NamespaceSecurable.cs</Link>
+    </Compile>
+    <Compile Include="..\Bifrost\Security\RoleRule.cs">
+      <Link>Security\RoleRule.cs</Link>
+    </Compile>
+    <Compile Include="..\Bifrost\Security\RuleEvaluationError.cs">
+      <Link>Security\RuleEvaluationError.cs</Link>
+    </Compile>
+    <Compile Include="..\Bifrost\Security\Securable.cs">
+      <Link>Security\Securable.cs</Link>
+    </Compile>
+    <Compile Include="..\Bifrost\Security\SecurableExtensions.cs">
+      <Link>Security\SecurableExtensions.cs</Link>
+    </Compile>
+    <Compile Include="..\Bifrost\Security\SecurityAction.cs">
+      <Link>Security\SecurityAction.cs</Link>
+    </Compile>
+    <Compile Include="..\Bifrost\Security\SecurityActor.cs">
+      <Link>Security\SecurityActor.cs</Link>
+    </Compile>
+    <Compile Include="..\Bifrost\Security\SecurityContext.cs">
+      <Link>Security\SecurityContext.cs</Link>
+    </Compile>
+    <Compile Include="..\Bifrost\Security\SecurityContextExtensions.cs">
+      <Link>Security\SecurityContextExtensions.cs</Link>
+    </Compile>
+    <Compile Include="..\Bifrost\Security\SecurityDescriptorBuilder.cs">
+      <Link>Security\SecurityDescriptorBuilder.cs</Link>
+    </Compile>
+    <Compile Include="..\Bifrost\Security\SecurityManager.cs">
+      <Link>Security\SecurityManager.cs</Link>
+    </Compile>
+    <Compile Include="..\Bifrost\Security\SecurityResult.cs">
+      <Link>Security\SecurityResult.cs</Link>
+    </Compile>
+    <Compile Include="..\Bifrost\Security\SecurityTarget.cs">
+      <Link>Security\SecurityTarget.cs</Link>
+    </Compile>
+    <Compile Include="..\Bifrost\Security\TypeSecurable.cs">
+      <Link>Security\TypeSecurable.cs</Link>
+    </Compile>
+    <Compile Include="..\Bifrost\Security\UserSecurityActor.cs">
+      <Link>Security\UserSecurityActor.cs</Link>
+    </Compile>
+    <Compile Include="..\Bifrost\Security\UserSecurityActorExtensions.cs">
+      <Link>Security\UserSecurityActorExtensions.cs</Link>
+    </Compile>
     <Compile Include="..\Bifrost\Serialization\ISerializer.cs">
       <Link>Serialization\ISerializer.cs</Link>
     </Compile>
@@ -656,6 +788,9 @@
     </Compile>
     <Compile Include="..\Bifrost\Tasks\TaskStateChange.cs">
       <Link>Tasks\TaskStateChange.cs</Link>
+    </Compile>
+    <Compile Include="..\Bifrost\Tenancy\Tenant.cs">
+      <Link>Tenancy\Tenant.cs</Link>
     </Compile>
     <Compile Include="..\Bifrost\Time\Month.cs">
       <Link>Time\Month.cs</Link>

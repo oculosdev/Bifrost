@@ -17,7 +17,10 @@
 //
 #endregion
 using System;
+using System.Collections.Generic;
 using System.ComponentModel;
+using System.Linq;
+using System.Text;
 using Bifrost.Concepts;
 
 namespace Bifrost.Extensions
@@ -82,6 +85,27 @@ namespace Bifrost.Extensions
             }
 
             return Convert.ChangeType(str, type, null);           
+        }
+
+        /// <summary>
+        /// Concatenates all the strings into a single string, separated with the supplied separator
+        /// </summary>
+        /// <param name="strings">strings to concat</param>
+        /// <param name="separator">separator to include between each concatenated string value</param>
+        /// <returns></returns>
+        public static string ConcatAll(this IEnumerable<string> strings, string separator)
+        {
+            return strings.Aggregate(new StringBuilder(), (current, next) => current.Append(separator).Append(next)).ToString();
+        }
+
+        /// <summary>
+        /// Concatenates all the strings into a single string, separated with the default separator
+        /// </summary>
+        /// <param name="strings">strings to concat</param>
+        /// <returns></returns>
+        public static string ConcatAll(this IEnumerable<string> strings)
+        {
+            return ConcatAll(strings, ", ");
         }
     }
 }

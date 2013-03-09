@@ -22,6 +22,7 @@ using System.Security.Principal;
 using Bifrost.Domain;
 using Bifrost.Events;
 using Bifrost.Execution;
+using Bifrost.Extensions;
 
 namespace Bifrost.Commands
 {
@@ -30,27 +31,30 @@ namespace Bifrost.Commands
 	/// </summary>
 	public class CommandContext : ICommandContext
 	{
-        IEventStore _eventStore;
-        IUncommittedEventStreamCoordinator _uncommittedEventStreamCoordinator;
-		List<IAggregateRoot> _objectsTracked = new List<IAggregateRoot>();
-
-		/// <summary>
-		/// Initializes a new <see cref="CommandContext">CommandContext</see>
-		/// </summary>
-		/// <param name="command">The <see cref="ICommand">command</see> the context is for</param>
-		/// <param name="executionContext">The <see cref="IExecutionContext"/> for the command</param>
-        /// <param name="eventStore">A <see cref="IEventStore"/> that will receive any events generated</param>
-        /// <param name="uncommittedEventStreamCoordinator">The <see cref="IUncommittedEventStreamCoordinator"/> to use for coordinating the committing of events</param>
-		public CommandContext(
+        readonly IEventStore _eventStore;
+        readonly IUncommittedEventStreamCoordinator _uncommittedEventStreamCoordinator;
+        readonly IAggregateRootTracker _aggregateRootTracker;
+        
+	    /// <summary>
+	    /// Initializes a new <see cref="CommandContext">CommandContext</see>
+	    /// </summary>
+	    /// <param name="command">The <see cref="ICommand">command</see> the context is for</param>
+	    /// <param name="executionContext">The <see cref="IExecutionContext"/> for the command</param>
+	    /// <param name="eventStore">A <see cref="IEventStore"/> that will receive any events generated</param>
+	    /// <param name="uncommittedEventStreamCoordinator">The <see cref="IUncommittedEventStreamCoordinator"/> to use for coordinating the committing of events</param>
+	    /// <param name="aggregateRootTracker">The <see cref="IAggregateRootTracker"/> used for tracking aggreate roots involed in this command context</param>
+	    public CommandContext(
 			ICommand command,
 			IExecutionContext executionContext,
             IEventStore eventStore,
-			IUncommittedEventStreamCoordinator uncommittedEventStreamCoordinator)
+			IUncommittedEventStreamCoordinator uncommittedEventStreamCoordinator,
+            IAggregateRootTracker aggregateRootTracker)
 		{
 			Command = command;
 			ExecutionContext = executionContext;
             _eventStore = eventStore;
             _uncommittedEventStreamCoordinator = uncommittedEventStreamCoordinator;
+            _aggregateRootTracker = aggregateRootTracker;
 		}
 
 
@@ -58,15 +62,15 @@ namespace Bifrost.Commands
 		public ICommand Command { get; private set; }
 		public IExecutionContext ExecutionContext { get; private set; }
 
-		public void RegisterForTracking(IAggregateRoot aggregatedRoot)
+		public void RegisterForTracking(IAggregateRoot aggregateRoot)
 		{
-			_objectsTracked.Add(aggregatedRoot);
+		    _aggregateRootTracker.TrackAggregate(aggregateRoot);
 		}
 
-		public IEnumerable<IAggregateRoot> GetObjectsBeingTracked()
-		{
-			return _objectsTracked;
-		}
+	    public IEnumerable<IAggregateRoot> GetObjectsBeingTracked()
+	    {
+	        return _aggregateRootTracker.GetTrackedAggregates();
+	    }
 
 
 		/// <summary>

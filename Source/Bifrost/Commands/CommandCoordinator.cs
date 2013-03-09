@@ -17,6 +17,9 @@
 //
 #endregion
 using System;
+using System.Collections.Generic;
+using System.Linq;
+using Bifrost.Domain;
 using Bifrost.Globalization;
 using Bifrost.Lifecycle;
 using Bifrost.Sagas;
@@ -92,6 +95,16 @@ namespace Bifrost.Commands
                     {
                         _commandHandlerManager.Handle(command);
                         unitOfWork.Commit();
+                    }
+                    catch (UnauthorizedAccessToAggregateRootException ex)
+                    {
+                        var securityMessages = ex.Data[UnauthorizedAccessToAggregateRootException.SecurityMessages] as IEnumerable<string>;
+                        if (securityMessages == null || !securityMessages.Any())
+                        {
+                            securityMessages = new string[] { "Unauthorized access to aggregate root."};
+                        }
+                        commandResult.SecurityMessages = securityMessages;
+                        unitOfWork.Rollback();
                     }
                     catch (Exception exception)
                     {

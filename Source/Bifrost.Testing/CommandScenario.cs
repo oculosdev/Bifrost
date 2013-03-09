@@ -53,8 +53,10 @@ namespace Bifrost.Testing
         readonly Mock<ISagaLibrarian> saga_librarian;
         readonly Mock<IProcessMethodInvoker> process_method_invoker;
         readonly Mock<ICommandSecurityManager> command_security_manager_mock;
+        readonly Mock<IAggregateRootSecurityManager> aggregate_root_security_manager_mock;
         readonly IExecutionContextManager execution_context_manager;
         readonly ICanValidate<T> null_validator = new NullCommandInputValidator();
+        readonly IAggregateRootTracker aggregate_root_tracker;
 
         dynamic command_handler;
         ICanValidate<T> input_validator;
@@ -65,6 +67,12 @@ namespace Bifrost.Testing
 
         public CommandScenario()
         {
+            command_security_manager_mock = new Mock<ICommandSecurityManager>();
+            aggregate_root_security_manager_mock = new Mock<IAggregateRootSecurityManager>();
+            //TODO: Allow spec'ing of Security
+            command_security_manager_mock.Setup(s => s.Authorize(It.IsAny<ICommand>())).Returns(new AuthorizationResult());
+            aggregate_root_security_manager_mock.Setup(s => s.Authorize(It.IsAny<IAggregateRoot>())).Returns(new AuthorizationResult());
+
             principal = new GenericPrincipal(new GenericIdentity("test"), new string[] { });
             GeneratedEvents = new UncommittedEventStream(Guid.Empty);
             uncommitted_event_stream_coordinator = new Mock<IUncommittedEventStreamCoordinator>();
@@ -72,8 +80,10 @@ namespace Bifrost.Testing
             saga_librarian = new Mock<ISagaLibrarian>();
             process_method_invoker = new Mock<IProcessMethodInvoker>();
             execution_context_manager = new ExecutionContextManager();
+            aggregate_root_tracker = new AggregateRootTracker(aggregate_root_security_manager_mock.Object);
+
             command_context_manager = new CommandContextManager(uncommitted_event_stream_coordinator.Object, saga_librarian.Object, process_method_invoker.Object,
-                                                                                                                            execution_context_manager, event_store.Object);
+                                                                                                                            execution_context_manager, event_store.Object, aggregate_root_tracker);
 
             command_handler_manager = new Mock<ICommandHandlerManager>();
             command_handler_manager.Setup(m => m.Handle(It.IsAny<ICommand>())).Callback((ICommand c) => command_handler.Handle((dynamic)c));
@@ -83,9 +93,7 @@ namespace Bifrost.Testing
             command_validator_provider = new Mock<ICommandValidatorProvider>();
             command_validation_service = new CommandValidationService(command_validator_provider.Object);
 
-            command_security_manager_mock = new Mock<ICommandSecurityManager>();
-            //TODO: Allow spec'ing of Security
-            command_security_manager_mock.Setup(s => s.Authorize(It.IsAny<ICommand>())).Returns(new AuthorizationResult());
+
 
             command_coordinator = new CommandCoordinator(
                                         command_handler_manager.Object, 

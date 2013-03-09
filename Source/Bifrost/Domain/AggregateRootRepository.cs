@@ -48,6 +48,8 @@ namespace Bifrost.Domain
 			var commandContext = _commandContextManager.GetCurrent();
 			var type = typeof (T);
 			var aggregatedRoot = Activator.CreateInstance(type, id) as T;
+            commandContext.RegisterForTracking(aggregatedRoot);
+
 			if (null != aggregatedRoot)
 			{
                 if(!aggregatedRoot.IsStateless())
@@ -62,7 +64,6 @@ namespace Bifrost.Domain
                     aggregatedRoot.FastForward(version);
                 }
 			}
-            commandContext.RegisterForTracking(aggregatedRoot);
 
 			return aggregatedRoot;
 		}

@@ -44,8 +44,8 @@ namespace Bifrost.Commands
 		/// <summary>
 		/// Register an aggregated root for tracking
 		/// </summary>
-		/// <param name="aggregatedRoot">Aggregated root to track</param>
-		void RegisterForTracking(IAggregateRoot aggregatedRoot);
+		/// <param name="aggregateRoot">Aggregated root to track</param>
+		void RegisterForTracking(IAggregateRoot aggregateRoot);
 
 		/// <summary>
 		/// Get objects that are being tracked

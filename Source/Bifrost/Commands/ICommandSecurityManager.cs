@@ -26,10 +26,10 @@ namespace Bifrost.Commands
     public interface ICommandSecurityManager
     {
         /// <summary>
-        /// Decides wether or not in the current context wether or not we can handle a command
+        /// Decides whether we can handle a command in the current context
         /// </summary>
         /// <param name="command"><see cref="ICommand"/> to ask for</param>
-        /// <returns>true if it is allowed to go on and be handler, false if not</returns>
+        /// <returns>An <see cref="AuthorizationResult"/> with IsAuthorized flag set to true if authorized, false is not authorized</returns>
         AuthorizationResult Authorize(ICommand command);
     }
 }

@@ -29,10 +29,6 @@ namespace Bifrost.Principal
     /// </summary>
     public class CurrentPrincipal : IDisposable
     {
-        /// <summary>
-        /// Gets the minimum time supported by the <see cref="SystemClock"/>
-        /// </summary>
-        public static readonly DateTime MinimumTime = new DateTime(1900, 1, 1);
 
         static readonly Stack<IPrincipal> _principals = new Stack<IPrincipal>();
 
@@ -47,7 +43,11 @@ namespace Bifrost.Principal
 #if(NETFX_CORE)
             throw new NotImplementedException();
 #else
+#if(SILVERLIGHT)
+            throw new NotImplementedException();
+#else
             return Thread.CurrentPrincipal;
+#endif
 #endif
         }
 

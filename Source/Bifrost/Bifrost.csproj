@@ -112,6 +112,15 @@
     <Compile Include="Configuration\IConfigure.cs" />
     <Compile Include="Configuration\ISagasConfiguration.cs" />
     <Compile Include="Configuration\SagasConfiguration.cs" />
+    <Compile Include="Domain\AccessingAggregateRoot.cs" />
+    <Compile Include="Domain\AggregateRootSecurityContext.cs" />
+    <Compile Include="Domain\AggregateRootSecurityExtensions.cs" />
+    <Compile Include="Domain\AggregateRootSecurityManager.cs" />
+    <Compile Include="Domain\AggregateRootSecurityTarget.cs" />
+    <Compile Include="Domain\AggregateRootTracker.cs" />
+    <Compile Include="Domain\IAggregateRootSecurityManager.cs" />
+    <Compile Include="Domain\IAggregateTracker.cs" />
+    <Compile Include="Domain\UnauthorizedAccessToAggregateRootException.cs" />
     <Compile Include="Dynamic\DynamicHelpers.cs" />
     <Compile Include="Events\AsynchronousUncommittedEventStreamCoordinator.cs" />
     <Compile Include="Events\EventExtensions.cs" />

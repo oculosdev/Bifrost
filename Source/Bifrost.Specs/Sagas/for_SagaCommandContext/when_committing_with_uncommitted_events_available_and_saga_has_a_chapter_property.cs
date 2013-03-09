@@ -1,4 +1,5 @@
-﻿using Bifrost.Testing.Fakes.Sagas;
+﻿using Bifrost.Domain;
+using Bifrost.Testing.Fakes.Sagas;
 using Bifrost.Sagas;
 using Machine.Specifications;
 
@@ -22,7 +23,9 @@ namespace Bifrost.Specs.Sagas.for_SagaCommandContext
                                         event_store_mock.Object,
                                         uncommitted_event_stream_coordinator_mock.Object,
                                         process_method_invoker_mock.Object,
-                                        saga_librarian_mock.Object);
+                                        saga_librarian_mock.Object,
+                                        aggregate_root_tracker
+                                        );
 
                                     command_context.RegisterForTracking(aggregated_root_mock.Object);
                                 };

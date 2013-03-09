@@ -37,6 +37,7 @@ namespace Bifrost.Sagas
         IUncommittedEventStreamCoordinator _uncommittedEventStreamCoordinator;
         IProcessMethodInvoker _processMethodInvoker;
         ISagaLibrarian _sagaLibrarian;
+        readonly IAggregateRootTracker _aggregateRootTracker;
         List<IAggregateRoot> _objectsTracked = new List<IAggregateRoot>();
 
 
@@ -50,6 +51,7 @@ namespace Bifrost.Sagas
         /// <param name="uncommittedEventStreamCoordinator">A <see cref="IUncommittedEventStreamCoordinator"/> to use for coordinating a <see cref="UncommittedEventStream"/></param>
         /// <param name="processMethodInvoker">A <see cref="IProcessMethodInvoker"/> for processing events on the <see cref="ISaga"/></param>
         /// <param name="sagaLibrarian">A <see cref="ISagaLibrarian"/> for dealing with the <see cref="ISaga"/> and persistence</param>
+        /// <param name="aggregateRootTracker">The <see cref="IAggregateRootTracker"/> used for tracking aggreate roots involed in this saga command context</param>
         public SagaCommandContext(
             ISaga saga,
             ICommand command,
@@ -57,7 +59,8 @@ namespace Bifrost.Sagas
             IEventStore eventStore,
             IUncommittedEventStreamCoordinator uncommittedEventStreamCoordinator,
             IProcessMethodInvoker processMethodInvoker,
-            ISagaLibrarian sagaLibrarian)
+            ISagaLibrarian sagaLibrarian,
+            IAggregateRootTracker aggregateRootTracker)
         {
             Command = command;
             ExecutionContext = executionContext;
@@ -66,20 +69,21 @@ namespace Bifrost.Sagas
             _uncommittedEventStreamCoordinator = uncommittedEventStreamCoordinator;
             _processMethodInvoker = processMethodInvoker;
             _sagaLibrarian = sagaLibrarian;
+            _aggregateRootTracker = aggregateRootTracker;
         }
 
 #pragma warning disable 1591 // Xml Comments
         public ICommand Command { get; private set; }
         public IExecutionContext ExecutionContext { get; private set; }
 
-        public void RegisterForTracking(IAggregateRoot aggregatedRoot)
+        public void RegisterForTracking(IAggregateRoot aggregateRoot)
         {
-            _objectsTracked.Add(aggregatedRoot);
+            _aggregateRootTracker.TrackAggregate(aggregateRoot);
         }
 
         public IEnumerable<IAggregateRoot> GetObjectsBeingTracked()
         {
-            return _objectsTracked;
+            return _aggregateRootTracker.GetTrackedAggregates();
         }
 
 

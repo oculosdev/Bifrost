@@ -85,6 +85,8 @@
     <Compile Include="Commands\for_CommandContext\when_getting_objects_being_tracked.cs" />
     <Compile Include="Commands\for_CommandCoordinator\given\a_command_coordinator.cs" />
     <Compile Include="Commands\for_CommandCoordinator\when_handling_an_invalid_command.cs" />
+    <Compile Include="Commands\for_CommandCoordinator\when_handling_a_command_that_accesses_an_aggregate_root_that_is_not_authorized.cs" />
+    <Compile Include="Commands\for_CommandCoordinator\when_handling_a_command_that_accesses_an_aggregate_root_that_is_not_authorized_with_security_messages.cs" />
     <Compile Include="Commands\for_CommandCoordinator\when_handling_a_command_that_fails_security.cs" />
     <Compile Include="Commands\for_CommandCoordinator\when_handling_command_and_an_exception_occurs_during_handling.cs" />
     <Compile Include="Commands\for_CommandCoordinator\when_handling_command_with_success.cs" />
@@ -132,6 +134,10 @@
     <Compile Include="Domain\for_AggregateRootRepository\given\a_repository_for_a_stateless_aggregate_root.cs" />
     <Compile Include="Domain\for_AggregateRootRepository\when_getting_a_stateful_aggregate_root_that_has_no_events.cs" />
     <Compile Include="Domain\for_AggregateRootRepository\when_getting_a_stateless_aggregate_root_that_has_events.cs" />
+    <Compile Include="Domain\for_AggregateRootTracker\given\an_aggregate_root_tracker.cs" />
+    <Compile Include="Domain\for_AggregateRootTracker\when_adding_an_aggregate_for_tracking.cs" />
+    <Compile Include="Domain\for_AggregateRootTracker\when_adding_an_aggregate_that_is_not_authorized_to_access.cs" />
+    <Compile Include="Domain\for_AggregateRootTracker\when_adding_multiple_aggregates_for_tracking.cs" />
     <Compile Include="Events\for_UncommittedEventStreamCoordinator\given\an_uncommitted_event_stream_coordinator.cs" />
     <Compile Include="Events\for_UncommittedEventStreamCoordinator\when_committing.cs" />
     <Compile Include="Events\for_EventExtensions\when_marking_two_events_with_command_details.cs" />

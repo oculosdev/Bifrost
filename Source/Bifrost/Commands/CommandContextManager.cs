@@ -17,6 +17,7 @@
 //
 #endregion
 using System;
+using Bifrost.Domain;
 using Bifrost.Events;
 using Bifrost.Sagas;
 using Bifrost.Execution;
@@ -33,6 +34,7 @@ namespace Bifrost.Commands
         ISagaLibrarian _sagaLibrarian;
         IProcessMethodInvoker _processMethodInvoker;
         IExecutionContextManager _executionContextManager;
+        IAggregateRootTracker _aggregateRootTracker;
 
         [ThreadStatic] static ICommandContext _currentContext;
 
@@ -52,17 +54,20 @@ namespace Bifrost.Commands
         /// <param name="processMethodInvoker">A <see cref="IProcessMethodInvoker"/> for processing events</param>
         /// <param name="executionContextManager">A <see cref="IExecutionContextManager"/> for getting execution context from</param>
         /// <param name="eventStore">A <see cref="IEventStore"/> that will receive any events generated</param>
+        /// <param name="aggregateRootTracker">The <see cref="IAggregateRootTracker"/> used for tracking aggreate roots involed in this command context</param>
         public CommandContextManager(
             IUncommittedEventStreamCoordinator uncommittedEventStreamCoordinator,
             ISagaLibrarian sagaLibrarian,
             IProcessMethodInvoker processMethodInvoker,
             IExecutionContextManager executionContextManager,
-            IEventStore eventStore)
+            IEventStore eventStore, 
+            IAggregateRootTracker aggregateRootTracker)
         {
             _uncommittedEventStreamCoordinator = uncommittedEventStreamCoordinator;
             _sagaLibrarian = sagaLibrarian;
             _processMethodInvoker = processMethodInvoker;
             _eventStore = eventStore;
+            _aggregateRootTracker = aggregateRootTracker;
             _executionContextManager = executionContextManager;
         }
 
@@ -95,7 +100,8 @@ namespace Bifrost.Commands
                     command,
                     _executionContextManager.Current,
                     _eventStore,
-                    _uncommittedEventStreamCoordinator
+                    _uncommittedEventStreamCoordinator,
+                    _aggregateRootTracker
                     );
 
                 _currentContext = commandContext;
@@ -114,7 +120,8 @@ namespace Bifrost.Commands
                         _eventStore,
                         _uncommittedEventStreamCoordinator,
                         _processMethodInvoker,
-                        _sagaLibrarian
+                        _sagaLibrarian,
+                        _aggregateRootTracker
                     );
 
                 _currentContext = commandContext;
