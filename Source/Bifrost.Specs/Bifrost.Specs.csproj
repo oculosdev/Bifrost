@@ -330,12 +330,17 @@
     <Compile Include="Sagas\for_Saga\when_setting_the_current_chapter.cs" />
     <Compile Include="Security\for_AccessToInstanceRule\given\an_access_to_instance_rule.cs" />
     <Compile Include="Security\for_AccessToInstanceRule\when_authorizing_with_instance_that_is_authorized.cs" />
+    <Compile Include="Security\for_AccessToInstanceRule\when_authorizing_with_instance_that_is_not_authorized.cs" />
     <Compile Include="Security\for_AuthorizationDescriptorResult\when_building_the_failed_authorization_messages.cs" />
     <Compile Include="Security\for_AuthorizationResult\when_building_the_failed_authorization_messages.cs" />
     <Compile Include="Security\for_AuthorizationTargetResult\when_building_the_failed_authorization_messages.cs" />
     <Compile Include="Security\for_AuthorizeActionResult\when_building_the_failed_authorization_messages.cs" />
     <Compile Include="Security\for_AuthorizeActorResult\when_building_the_failed_authorization_messages.cs" />
     <Compile Include="Security\for_AuthorizeSecurableResult\when_building_the_failed_authorization_messages.cs" />
+    <Compile Include="Security\for_InstanceAuthorizerProvider\given\an_instance_authorizer_provider.cs" />
+    <Compile Include="Security\for_InstanceAuthorizerProvider\when_created.cs" />
+    <Compile Include="Security\for_InstanceAuthorizerProvider\when_getting_an_authorizer_for_a_type_with_a_specific_implementation.cs" />
+    <Compile Include="Security\for_InstanceAuthorizerProvider\when_getting_an_authorizer_for_a_type_with_no_specific_implementation.cs" />
     <Compile Include="Security\for_NamespaceSecurable\given\a_namespace_securable.cs" />
     <Compile Include="Security\for_NamespaceSecurable\when_checking_can_authorize_for_action_with_exact_namespace_match.cs" />
     <Compile Include="Security\for_NamespaceSecurable\when_checking_can_authorize_for_action_with_no_namespace_match.cs" />

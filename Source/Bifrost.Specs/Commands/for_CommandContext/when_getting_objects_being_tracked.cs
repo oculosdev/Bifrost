@@ -12,6 +12,6 @@ namespace Bifrost.Specs.Commands.for_CommandContext
         Because of = () => result = command_context.GetObjectsBeingTracked();
 
         It should_return_one_aggregated_root = () => result.Count().ShouldEqual(1);
-        It should_have_the_expected_aggreated_root = () => result.First().ShouldEqual(aggregated_root);
+        It should_have_the_expected_aggreated_root = () => result.First().ShouldEqual(aggregate_root);
     }
 }

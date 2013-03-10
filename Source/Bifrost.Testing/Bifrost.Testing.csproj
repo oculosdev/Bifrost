@@ -63,9 +63,9 @@
     <Compile Include="Fakes\Concepts\ConceptAsString.cs" />
     <Compile Include="Fakes\Configuration\EntityContextConfiguration.cs" />
     <Compile Include="Fakes\Domain\AnotherStatefulAggregatedRoot.cs" />
-    <Compile Include="Fakes\Domain\StatefulAggregatedRoot.cs" />
-    <Compile Include="Fakes\Domain\StatelessAggregatedRoot.cs" />
-    <Compile Include="Fakes\Domain\StatelessAggregatedRootWithOneMethod.cs" />
+    <Compile Include="Fakes\Domain\StatefulAggregateRoot.cs" />
+    <Compile Include="Fakes\Domain\StatelessAggregateRoot.cs" />
+    <Compile Include="Fakes\Domain\StatelessAggregateRootWithOneMethod.cs" />
     <Compile Include="Fakes\Entities\AnotherSimpleEntity.cs" />
     <Compile Include="Fakes\Entities\EntityContext.cs" />
     <Compile Include="Fakes\Entities\FakeEntityContextConnection.cs" />
@@ -92,6 +92,8 @@
     <Compile Include="Fakes\Security\FakeAuthorizationResult.cs" />
     <Compile Include="Fakes\Security\MySecurityAction.cs" />
     <Compile Include="Fakes\Security\SecurityDescriptor.cs" />
+    <Compile Include="Fakes\Security\StatefulAggregateRootAuthorizer.cs" />
+    <Compile Include="Fakes\Security\StatelessAggregateRootAuthorizer.cs" />
     <Compile Include="Properties\AssemblyInfo.cs" />
   </ItemGroup>
   <ItemGroup>

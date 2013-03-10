@@ -15,7 +15,7 @@ namespace Bifrost.Testing.Fakes.Security
             When.Handling().Commands()
                 .InNamespace(SECURED_NAMESPACE, n => n.User().MustBeInRole(NAMESPACE_ROLE));
             When.Handling().Commands()
-                .InstanceOf<SimpleCommand>(c => c.User().MustBeInRole(SIMPLE_COMMAND_ROLE));
+                .OfType<SimpleCommand>(c => c.User().MustBeInRole(SIMPLE_COMMAND_ROLE));
         }
     }
 }

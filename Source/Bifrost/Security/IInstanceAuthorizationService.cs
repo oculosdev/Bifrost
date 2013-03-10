@@ -11,6 +11,6 @@
         /// <typeparam name="T">The type of the instance to be authorized</typeparam>
         /// <param name="instance">The specific instance of type T</param>
         /// <returns>true for authorized, false for not authorized</returns>
-        bool IsAuthorized<T>(T instance);
+        bool IsAuthorized<T>(T instance) where T : class;
     }
 }

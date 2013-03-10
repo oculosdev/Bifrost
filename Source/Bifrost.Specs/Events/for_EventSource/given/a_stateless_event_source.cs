@@ -6,14 +6,14 @@ namespace Bifrost.Specs.Events.for_EventSource.given
 {
     public class a_stateless_event_source
     {
-        protected static StatelessAggregatedRoot event_source;
+        protected static StatelessAggregateRoot event_source;
         protected static Guid event_source_id;
 
         Establish context =
             () =>
                 {
                     event_source_id = Guid.NewGuid();
-                    event_source = new StatelessAggregatedRoot(event_source_id);
+                    event_source = new StatelessAggregateRoot(event_source_id);
                 };
         
     }

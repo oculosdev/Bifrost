@@ -172,7 +172,13 @@
     <Compile Include="Security\AuthorizeActorResult.cs" />
     <Compile Include="Security\AuthorizeSecurableResult.cs" />
     <Compile Include="Security\AuthorizeTargetResult.cs" />
+    <Compile Include="Security\DefaultInstanceAuthorizer.cs" />
     <Compile Include="Security\IInstanceAuthorizationService.cs" />
+    <Compile Include="Security\IInstanceAuthorizer.cs" />
+    <Compile Include="Security\InstanceAuthorizationService.cs" />
+    <Compile Include="Security\InstanceSecurable.cs" />
+    <Compile Include="Security\InstanceSecurityActor.cs" />
+    <Compile Include="Security\InstanceSecurityActorExtensions.cs" />
     <Compile Include="Security\ISecurityAction.cs" />
     <Compile Include="Security\ISecurityCondition.cs" />
     <Compile Include="Security\ISecurityContext.cs" />

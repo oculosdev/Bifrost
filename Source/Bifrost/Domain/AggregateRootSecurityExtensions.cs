@@ -51,15 +51,56 @@ namespace Bifrost.Domain
         /// <summary>
         /// Add a <see cref="TypeSecurable"/> to the <see cref="AggregateRootSecurityTarget"/> for a given type
         /// </summary>
-        /// <typeparam name="T">Type of <see cref="IAggregateRoot"/> to secure</typeparam>
+        /// <typeparam name="T">Type of <see cref="ICommand"/> to secure</typeparam>
         /// <param name="target"><see cref="AggregateRootSecurityTarget"/> to add to</param>
         /// <param name="continueWith">Callback for continuing the fluent interface</param>
         /// <returns><see cref="TypeSecurable"/> for the specific type</returns>
-        public static AggregateRootSecurityTarget InstanceOf<T>(this AggregateRootSecurityTarget target, Action<TypeSecurable> continueWith) where T : IAggregateRoot
+        public static AggregateRootSecurityTarget TypeOf<T>(this AggregateRootSecurityTarget target, Action<TypeSecurable> continueWith) where T : IAggregateRoot
         {
             var securable = new TypeSecurable(typeof(T));
             target.AddSecurable(securable);
             continueWith(securable);
+            return target;
+        }
+
+        /// <summary>
+        /// Add a <see cref="TypeSecurable"/> to the <see cref="AggregateRootSecurityTarget"/> for a given type
+        /// </summary>
+        /// <typeparam name="T">Type of <see cref="ICommand"/> to secure</typeparam>
+        /// <param name="target"><see cref="AggregateRootSecurityTarget"/> to add to</param>
+        /// <returns><see cref="TypeSecurable"/> for the specific type</returns>
+        public static AggregateRootSecurityTarget TypeOf<T>(this AggregateRootSecurityTarget target) where T : IAggregateRoot
+        {
+            var securable = new TypeSecurable(typeof(T));
+            target.AddSecurable(securable);
+            return target;
+        }
+
+        /// <summary>
+        /// Add a <see cref="InstanceSecurable"/> to the <see cref="AggregateRootSecurityTarget"/> for a given type
+        /// </summary>
+        /// <typeparam name="T">Type of <see cref="IAggregateRoot"/> to secure</typeparam>
+        /// <param name="target"><see cref="AggregateRootSecurityTarget"/> to add to</param>
+        /// <param name="continueWith">Callback for continuing the fluent interface</param>
+        /// <returns><see cref="InstanceSecurable"/> for the specific type</returns>
+        public static AggregateRootSecurityTarget InstanceOfType<T>(this AggregateRootSecurityTarget target, Action<InstanceSecurable> continueWith) where T : IAggregateRoot
+        {
+            var securable = new InstanceSecurable(typeof(T));
+            target.AddSecurable(securable);
+            continueWith(securable);
+            return target;
+        }
+
+        /// <summary>
+        /// Add a <see cref="InstanceSecurable"/> to the <see cref="AggregateRootSecurityTarget"/> for a given type
+        /// </summary>
+        /// <typeparam name="T">Type of <see cref="IAggregateRoot"/> to secure</typeparam>
+        /// <param name="target"><see cref="AggregateRootSecurityTarget"/> to add to</param>
+        /// <returns><see cref="InstanceSecurable"/> for the specific type</returns>
+        public static AggregateRootSecurityTarget InstanceOfType<T>(this AggregateRootSecurityTarget target) where T : IAggregateRoot
+        {
+            var securable = new InstanceSecurable(typeof(T));
+            target.AddSecurable(securable);
             return target;
         }
     }

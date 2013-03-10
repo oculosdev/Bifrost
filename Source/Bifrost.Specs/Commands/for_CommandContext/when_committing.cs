@@ -17,6 +17,6 @@ namespace Bifrost.Specs.Commands.for_CommandContext
 
         It should_commit_on_the_uncommitted_event_stream_coordinator = () => event_stream.ShouldNotBeNull();
         It should_commit_on_the_uncommitted_event_stream_coordinator_with_the_event_in_event_stream = () => event_stream.ShouldContainOnly(uncommitted_event);
-        It should_commit_aggregated_root = () => aggregated_root.CommitCalled.ShouldBeTrue();
+        It should_commit_aggregated_root = () => aggregate_root.CommitCalled.ShouldBeTrue();
     }
 }

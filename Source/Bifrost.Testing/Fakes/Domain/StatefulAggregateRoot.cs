@@ -4,12 +4,12 @@ using Bifrost.Testing.Fakes.Events;
 
 namespace Bifrost.Testing.Fakes.Domain
 {
-    public class StatefulAggregatedRoot : AggregateRoot
+    public class StatefulAggregateRoot : AggregateRoot
     {
         public string Value { get; set; }
         public bool EventApplied { get; private set; }
 
-        public StatefulAggregatedRoot(Guid id) : base(id)
+        public StatefulAggregateRoot(Guid id) : base(id)
         {
         }
 

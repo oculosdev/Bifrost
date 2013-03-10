@@ -666,6 +666,9 @@
     <Compile Include="..\Bifrost\Security\BaseSecurityDescriptor.cs">
       <Link>Security\BaseSecurityDescriptor.cs</Link>
     </Compile>
+    <Compile Include="..\Bifrost\Security\InstanceSecurable.cs">
+      <Link>Security\InstanceSecurable.cs</Link>
+    </Compile>
     <Compile Include="..\Bifrost\Security\ISecurable.cs">
       <Link>Security\ISecurable.cs</Link>
     </Compile>

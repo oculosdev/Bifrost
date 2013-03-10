@@ -64,6 +64,20 @@ namespace Bifrost.Commands
             return target;
         }
 
+
+        /// <summary>
+        /// Add a <see cref="TypeSecurable"/> to the <see cref="CommandSecurityTarget"/> for a given type
+        /// </summary>
+        /// <typeparam name="T">Type of <see cref="ICommand"/> to secure</typeparam>
+        /// <param name="target"><see cref="CommandSecurityTarget"/> to add to</param>
+        /// <returns><see cref="TypeSecurable"/> for the specific type</returns>
+        public static CommandSecurityTarget OfType<T>(this CommandSecurityTarget target) where T : ICommand
+        {
+            var securable = new TypeSecurable(typeof(T));
+            target.AddSecurable(securable);
+            return target;
+        }
+
         /// <summary>
         /// Add a <see cref="TypeSecurable"/> to the <see cref="CommandSecurityTarget"/> for a given type
         /// </summary>
@@ -71,11 +85,39 @@ namespace Bifrost.Commands
         /// <param name="target"><see cref="CommandSecurityTarget"/> to add to</param>
         /// <param name="continueWith">Callback for continuing the fluent interface</param>
         /// <returns><see cref="TypeSecurable"/> for the specific type</returns>
-        public static CommandSecurityTarget InstanceOf<T>(this CommandSecurityTarget target, Action<TypeSecurable> continueWith) where T : ICommand
+        public static CommandSecurityTarget OfType<T>(this CommandSecurityTarget target, Action<TypeSecurable> continueWith) where T : ICommand
         {
             var securable = new TypeSecurable(typeof(T));
             target.AddSecurable(securable);
             continueWith(securable);
+            return target;
+        }
+
+        /// <summary>
+        /// Add a <see cref="InstanceSecurable"/> to the <see cref="CommandSecurityTarget"/> for a given type
+        /// </summary>
+        /// <typeparam name="T">Type of <see cref="ICommand"/> to secure</typeparam>
+        /// <param name="target"><see cref="CommandSecurityTarget"/> to add to</param>
+        /// <param name="continueWith">Callback for continuing the fluent interface</param>
+        /// <returns><see cref="InstanceSecurable"/> for the specific type</returns>
+        public static CommandSecurityTarget InstanceOfType<T>(this CommandSecurityTarget target, Action<InstanceSecurable> continueWith) where T : ICommand
+        {
+            var securable = new InstanceSecurable(typeof(T));
+            target.AddSecurable(securable);
+            continueWith(securable);
+            return target;
+        }
+
+        /// <summary>
+        /// Add a <see cref="InstanceSecurable"/> to the <see cref="CommandSecurityTarget"/> for a given type
+        /// </summary>
+        /// <typeparam name="T">Type of <see cref="ICommand"/> to secure</typeparam>
+        /// <param name="target"><see cref="CommandSecurityTarget"/> to add to</param>
+        /// <returns><see cref="InstanceSecurable"/> for the specific type</returns>
+        public static CommandSecurityTarget InstanceOfType<T>(this CommandSecurityTarget target) where T : ICommand
+        {
+            var securable = new InstanceSecurable(typeof(T));
+            target.AddSecurable(securable);
             return target;
         }
     }

@@ -3,9 +3,9 @@ using Bifrost.Domain;
 
 namespace Bifrost.Testing.Fakes.Domain
 {
-    public class StatelessAggregatedRootWithOneMethod : AggregateRoot
+    public class StatelessAggregateRootWithOneMethod : AggregateRoot
     {
-        public StatelessAggregatedRootWithOneMethod(Guid id) : base(id)
+        public StatelessAggregateRootWithOneMethod(Guid id) : base(id)
         {
         }
 
