@@ -337,6 +337,8 @@
     <Compile Include="Security\for_AuthorizeActionResult\when_building_the_failed_authorization_messages.cs" />
     <Compile Include="Security\for_AuthorizeActorResult\when_building_the_failed_authorization_messages.cs" />
     <Compile Include="Security\for_AuthorizeSecurableResult\when_building_the_failed_authorization_messages.cs" />
+    <Compile Include="Security\for_InstanceAuthorizationService\given\an_instance_authorization_service.cs" />
+    <Compile Include="Security\for_InstanceAuthorizationService\when_authorizing_an_instance.cs" />
     <Compile Include="Security\for_InstanceAuthorizerProvider\given\an_instance_authorizer_provider.cs" />
     <Compile Include="Security\for_InstanceAuthorizerProvider\when_created.cs" />
     <Compile Include="Security\for_InstanceAuthorizerProvider\when_getting_an_authorizer_for_a_type_with_a_specific_implementation.cs" />
