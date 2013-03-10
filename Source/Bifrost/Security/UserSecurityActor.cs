@@ -46,5 +46,7 @@ namespace Bifrost.Security
         {
             return CurrentPrincipal.Get().IsInRole(role);
         }
+
+
     }
 }

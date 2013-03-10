@@ -165,12 +165,14 @@
     <Compile Include="Sagas\SagaConverter.cs" />
     <Compile Include="Sagas\SagaState.cs" />
     <Compile Include="Sagas\State.cs" />
+    <Compile Include="Security\AccessToInstanceRule.cs" />
     <Compile Include="Security\AuthorizeDescriptorResult.cs" />
     <Compile Include="Security\AuthorizationResult.cs" />
     <Compile Include="Security\AuthorizeActionResult.cs" />
     <Compile Include="Security\AuthorizeActorResult.cs" />
     <Compile Include="Security\AuthorizeSecurableResult.cs" />
     <Compile Include="Security\AuthorizeTargetResult.cs" />
+    <Compile Include="Security\IInstanceAuthorizationService.cs" />
     <Compile Include="Security\ISecurityAction.cs" />
     <Compile Include="Security\ISecurityCondition.cs" />
     <Compile Include="Security\ISecurityContext.cs" />

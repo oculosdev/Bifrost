@@ -37,7 +37,7 @@ namespace Bifrost.Security
             _userToAuthorize = userToAuthorize;
             Role = role;
         }
-
+        
         /// <summary>
         /// Gets the role for the rule
         /// </summary>
