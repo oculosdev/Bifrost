@@ -16,7 +16,7 @@ namespace Bifrost.QuickStart
                 .Events
                     .Asynchronous(e=>e.UsingSignalR())
                 .DefaultStorage
-                    .UsingRavenDBEmbedded(e=>e.LocatedAt(dataPath))
+                    .UsingRavenDB(e => e.WithDefaultDatabase("Test").WithUrl("http://localhost:8080"))
                 .Frontend
                     .Web(w=>w.AsSinglePageApplication())
                 .Statistics

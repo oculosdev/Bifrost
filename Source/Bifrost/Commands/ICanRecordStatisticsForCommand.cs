@@ -16,19 +16,22 @@
 // limitations under the License.
 //
 #endregion
-using System.Collections.Generic;
+using Bifrost.Commands;
+using Bifrost.Statistics;
 
-namespace Bifrost.Statistics
+namespace Bifrost.Commands
 {
     /// <summary>
-    /// A statistic that can be visited by statistics plugins
+    /// Represents something that is able to record statistics for a <see cref="ICommand">command</see> and its <see cref="CommandResult"/>
     /// </summary>
-    public interface IVisitableStatistic
+    public interface ICanRecordStatisticsForCommand
     {
         /// <summary>
-        /// Record a category against this statistic
+        /// Records statistics for the <see cref="ICommand"/> and its <see cref="CommandResult"/> in any category
         /// </summary>
-        /// <param name="category">The category</param>
-        void Record(string category);
+        /// <param name="command"><see cref="ICommand"/> to record for</param>
+        /// <param name="commandResult">The command result</param>
+        /// <param name="recordStatisticsForCategory">Delegate that can be called to record a specific category</param>
+        void Record(ICommand command, CommandResult commandResult, RecordStatisticsForCategory recordStatisticsForCategory);
     }
 }

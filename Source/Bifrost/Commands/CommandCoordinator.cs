@@ -66,14 +66,14 @@ namespace Bifrost.Commands
 		public CommandResult Handle(ISaga saga, ICommand command)
 		{
             var commandResult = Handle(_commandContextManager.EstablishForSaga(saga, command), command);
-            _commandStatistics.Record(commandResult);
+            _commandStatistics.Record(command, commandResult);
             return commandResult;
         }
 
 		public CommandResult Handle(ICommand command)
 		{
             var commandResult = Handle(_commandContextManager.EstablishForCommand(command), command);
-            _commandStatistics.Record(commandResult);
+            _commandStatistics.Record(command, commandResult);
             return commandResult;
 		}
 
@@ -108,6 +108,7 @@ namespace Bifrost.Commands
                         unitOfWork.Rollback();
                     }
                 }
+
                 return commandResult;
             }            
         }

@@ -25,9 +25,10 @@ namespace Bifrost.Statistics
     public class NullStatisticsStore : IStatisticsStore
     {
 #pragma warning disable 1591 // Xml Comments
-        public void Add(IStatistic statistic)
+        public void Record(string context, string @event, string categoryOwner, string category)
         {
         }
 #pragma warning restore 1591 // Xml Comments
+
     }
 }

@@ -16,31 +16,42 @@
 // limitations under the License.
 //
 #endregion
-using System.Collections.Generic;
 
 namespace Bifrost.Statistics
 {
     /// <summary>
-    /// A statistic
+    /// Represents an entry for statistics
     /// </summary>
-    public interface IStatistic : IVisitableStatistic
+    public class StatisticEntry
     {
         /// <summary>
-        /// The categories for this statistic
+        /// Gets or sets the identifier of the entry
         /// </summary>
-        IDictionary<string, ICollection<string>> Categories { get; }
+        public int Id { get; set; }
 
         /// <summary>
-        /// Record a category against this statistic
+        /// Gets or sets the context for the entry
         /// </summary>
-        /// <param name="category">The category</param>
-        /// <param name="context">The context of this category</param>
-        void Record(string context, string category);
+        public string Context { get; set; }
 
         /// <summary>
-        /// Sets the current context for recording statistics;
+        /// Gets or sets the event for the entry
         /// </summary>
-        /// <param name="context"></param>
-        void SetContext(string context);
+        public string Event { get; set; }
+
+        /// <summary>
+        /// Gets or sets the owner of the category for the entry
+        /// </summary>
+        public string CategoryOwner { get; set; }
+
+        /// <summary>
+        /// Gets or sets the category for the entry
+        /// </summary>
+        public string Category { get; set; }
+
+        /// <summary>
+        /// Gets or sets the count for the entry - the value we're measuring
+        /// </summary>
+        public long Count { get; set; }
     }
 }

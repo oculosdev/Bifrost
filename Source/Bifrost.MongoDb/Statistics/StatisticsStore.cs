@@ -23,7 +23,7 @@ namespace Bifrost.MongoDB.Statistics
 {
     public class StatisticsStore : IStatisticsStore
     {
-        public void Add(IStatistic statistic)
+        public void Record(string context, string @event, string categoryOwner, string category)
         {
             throw new NotImplementedException();
         }

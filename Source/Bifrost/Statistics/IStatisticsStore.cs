@@ -25,9 +25,12 @@ namespace Bifrost.Statistics
     public interface IStatisticsStore
     {
         /// <summary>
-        /// Adds a statistic
+        /// Record statistics for a given context, event and category
         /// </summary>
-        /// <param name="statistic">The statistic</param>
-        void Add(IStatistic statistic);
+        /// <param name="context">Context to record for</param>
+        /// <param name="event">Event to record for</param>
+        /// <param name="categoryOwner">Owner of the category to record for</param>
+        /// <param name="category">Category to record for</param>
+        void Record(string context, string @event, string categoryOwner, string category);
     }
 }

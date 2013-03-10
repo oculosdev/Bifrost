@@ -16,20 +16,20 @@
 // limitations under the License.
 //
 #endregion
-using Bifrost.Commands;
-
+using Bifrost.Statistics;
 namespace Bifrost.Commands
 {
     /// <summary>
-    /// Defines the functionality for recording statistics for <see cref="ICommandStatistics"/>
+    /// Represents a <see cref="ICanRecordStatisticsForCommand">statistics recorder</see> that is able to record according 
+    /// to the namespace the <see cref="ICommand"/> sits in
     /// </summary>
-    public interface ICommandStatistics
+    public class CommandByNamespaceStatisticsRecorder : ICanRecordStatisticsForCommand
     {
-        /// <summary>
-        /// Record statistics against a <see cref="ICommand">command</see> and its <see cref="CommandResult">result</see>
-        /// </summary>
-        /// <param name="command">The <see cref="ICommand"/> we want to record statistics for</param>
-        /// <param name="commandResult">The <see cref="CommandResult"/> we want to record statistics for</param>
-        void Record(ICommand command, CommandResult commandResult);
+#pragma warning disable 1591 // Xml Comments
+        public void Record(ICommand command, CommandResult commandResult, RecordStatisticsForCategory recordStatisticsForCategory)
+        {
+            recordStatisticsForCategory(command.GetType().Namespace);
+        }
+#pragma warning restore 1591 // Xml Comments
     }
 }

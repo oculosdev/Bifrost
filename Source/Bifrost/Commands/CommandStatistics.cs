@@ -27,79 +27,83 @@ using System.Linq.Expressions;
 namespace Bifrost
 {
     /// <summary>
-    /// Command statistics
+    /// Represents an implementation of <see cref="ICommandStatistics"/>
     /// </summary>
     [Singleton]
     public class CommandStatistics : ICommandStatistics
     {
-        readonly IStatisticsStore _statisticsStore;
-        readonly ITypeDiscoverer _typeDiscoverer;
-        readonly ICollection<Type> _statisticsPlugins = new List<Type>();
+        /// <summary>
+        /// The Context used during statistics recording
+        /// </summary>
+        public const string ContextName = "Command";
 
         /// <summary>
-        /// Constructor for the command statistics
+        /// Represents the successful handling event
         /// </summary>
-        /// <param name="statisticsStore"></param>
-        /// <param name="typeDiscoverer"></param>
-        public CommandStatistics(IStatisticsStore statisticsStore, ITypeDiscoverer typeDiscoverer)
+        public const string SuccessEvent = "WasHandled";
+
+        /// <summary>
+        /// Represents an invalid command event
+        /// </summary>
+        public const string InvalidEvent = "HadValidationErrors";
+
+        /// <summary>
+        /// Represents an event for commands with an exception
+        /// </summary>
+        public const string HasExceptionEvent = "HasException";
+
+        /// <summary>
+        /// Represents an event for non authorized commands
+        /// </summary>
+        public const string NotAuthorizedEvent = "DidNotPassSecurity";
+
+        IStatisticsStore _statisticsStore;
+        ITypeDiscoverer _typeDiscoverer;
+        IEnumerable<Type> _recorderTypes;
+        IContainer _container;
+
+        /// <summary>
+        /// Initializes an instance of <see cref="CommandStatistics"/>
+        /// </summary>
+        /// <param name="statisticsStore"><see cref="IStatisticsStore"/> to use for storing statistics</param>
+        /// <param name="typeDiscoverer"><see cref="ITypeDiscoverer"/> for discovering recorders</param>
+        /// <param name="container"><see cref="IContainer"/> for getting instances of recorders</param>
+        public CommandStatistics(IStatisticsStore statisticsStore, ITypeDiscoverer typeDiscoverer, IContainer container)
         {
-            if (statisticsStore == null)
-                throw new ArgumentNullException("statisticsStore");
-
-            if (typeDiscoverer == null)
-                throw new ArgumentNullException("typeDiscoverer");
-
             _statisticsStore = statisticsStore;
             _typeDiscoverer = typeDiscoverer;
-            _statisticsPlugins = _typeDiscoverer.FindMultiple<ICanRecordStatisticsForCommand>();
+            _container = container;
+            _recorderTypes = _typeDiscoverer.FindMultiple<ICanRecordStatisticsForCommand>();
         }
 
-        /// <summary>
-        /// Record statistics about a command result
-        /// </summary>
-        /// <param name="commandResult">The command result</param>
-        public void Record(CommandResult commandResult)
+#pragma warning disable 1591 // Xml Comments
+        public void Record(ICommand command, CommandResult commandResult)
         {
-            CheckCommand(commandResult);
-
-            // record a handled command statistic
-            var context = this.GetType().Name;
-            var statistic = new Statistic(context);
-
-            if (commandResult.Success)
-                statistic.Record("WasHandled");
-
-            if (commandResult.Invalid)
-                statistic.Record("HadValidationError");
-
-            if (commandResult.HasException)
-                statistic.Record("HadException");
-
-            if (!commandResult.PassedSecurity)
-                statistic.Record("DidNotPassSecurity");
-
-            HandlePlugins(commandResult, statistic);
-
-            // clean up and set the context back to its original
-            statistic.SetContext(context);
-            _statisticsStore.Add(statistic);
-        }
-
-        private void HandlePlugins(CommandResult commandResult, IStatistic statistic)
-        {
-            // let plugins record their statistics
-            _statisticsPlugins.ToList().ForEach(type =>
+            try
             {
-                var constructor = Expression.Lambda(Expression.New(type.GetConstructor(Type.EmptyTypes))).Compile();
-                var plugin = (ICanRecordStatisticsForCommand)constructor.DynamicInvoke();
-                statistic.SetContext(type.Name);
-                plugin.Record(commandResult, statistic);
-            });
-        }
+                var eventName = GetEventNameFromCommandResult(commandResult);
 
-        private void CheckCommand(CommandResult commandResult)
+                foreach (var recorderType in _recorderTypes)
+                {
+                    var recorder = _container.Get(recorderType) as ICanRecordStatisticsForCommand;
+                    recorder.Record(command, commandResult, category => _statisticsStore.Record(ContextName, eventName, recorderType.Name, category));
+                }
+            }
+            catch
+            {
+                // We can't allow the system to not work if statistics doesn't work
+                // Todo: Log error to logging system
+            }
+        }
+#pragma warning restore 1591 // Xml Comments
+
+        string GetEventNameFromCommandResult(CommandResult commandResult)
         {
-            if (commandResult == null) throw new ArgumentNullException("commandResult");
+            if (commandResult.Success) return SuccessEvent;
+            if (commandResult.Invalid) return InvalidEvent;
+            if (commandResult.HasException) return HasExceptionEvent;
+            if (!commandResult.PassedSecurity) return NotAuthorizedEvent;
+            return "unknown";            
         }
     }
 }

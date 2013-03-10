@@ -111,12 +111,10 @@
     <Compile Include="Commands\for_CommandStatistics\when_recording_a_command_result_that_did_not_pass_security.cs" />
     <Compile Include="Commands\for_CommandStatistics\when_recording_a_command_result_with_a_validation_error.cs" />
     <Compile Include="Commands\for_CommandStatistics\when_recording_a_command_result_with_an_exception.cs" />
-    <Compile Include="Commands\for_CommandStatistics\given\a_command_statistics_with_registered_plugins.cs" />
+    <Compile Include="Commands\for_CommandStatistics\given\a_command_statistics_with_registered_recorder.cs" />
     <Compile Include="Commands\for_CommandStatistics\when_creating.cs" />
-    <Compile Include="Commands\for_CommandStatistics\Stubs.cs" />
     <Compile Include="Commands\for_CommandStatistics\when_recording_a_command_result_that_was_handled.cs" />
     <Compile Include="Commands\for_CommandStatistics\given\a_command_statistics.cs" />
-    <Compile Include="Commands\for_CommandStatistics\when_recording_a_null_command_result.cs" />
     <Compile Include="Commands\for_HandleCommandSecurityActionBuilder\when_targetting_commands.cs" />
     <Compile Include="Commands\for_CommandSecurityManager\given\a_command_security_manager.cs" />
     <Compile Include="Commands\for_CommandSecurityManager\when_authorizing_a_command.cs" />
@@ -393,13 +391,6 @@
     <Compile Include="Security\for_TypeSecurable\when_checking_can_authorize_for_null_action.cs" />
     <Compile Include="Security\for_UserSecurityActorExtensions\when_user_must_be_in_multiple_roles.cs" />
     <Compile Include="Security\for_UserSecurityActorExtensions\when_user_must_be_in_role.cs" />
-    <Compile Include="Statistics\for_Statistic\when_setting_context_to_null.cs" />
-    <Compile Include="Statistics\for_Statistic\when_setting_context_and_recording.cs" />
-    <Compile Include="Statistics\for_Statistic\when_recording_without_context.cs" />
-    <Compile Include="Statistics\for_Statistic\when_creating_with_null_default_context.cs" />
-    <Compile Include="Statistics\for_Statistic\given\a_statistic.cs" />
-    <Compile Include="Statistics\for_Statistic\when_recording_two_categories_for_a_single_context.cs" />
-    <Compile Include="Statistics\for_Statistic\when_creating.cs" />
     <Compile Include="Tasks\for_TaskManager\when_starting_and_it_gets_done.cs" />
     <Compile Include="Tasks\for_TaskManager\when_progress_is_made_on_started_task.cs" />
     <Compile Include="Tasks\for_TaskRepository\when_deleting_task_by_id.cs" />
@@ -574,6 +565,7 @@
     <Folder Include="Globalization\for_Localizer\given\" />
     <Folder Include="Security\for_SecurityActorExtensions\" />
     <Folder Include="Security\for_SecurityDescriptorBuilder\" />
+    <Folder Include="Statistics\" />
   </ItemGroup>
   <ItemGroup>
     <None Include="packages.config" />
