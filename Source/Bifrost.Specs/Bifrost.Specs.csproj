@@ -97,6 +97,7 @@
     <Compile Include="Commands\for_CommandHandlerInvoker\when_handling_with_no_command_handlers.cs" />
     <Compile Include="Commands\for_CommandHandlerManager\given\a_command_handler_manager.cs" />
     <Compile Include="Commands\for_CommandHandlerManager\when_handling_a_command_without_a_command_handler.cs" />
+    <Compile Include="Commands\for_CommandResult\when_containing_one_security_message.cs" />
     <Compile Include="Commands\for_CommandResult\when_containing_exception_and_one_validation_results.cs" />
     <Compile Include="Commands\for_CommandResult\when_containing_one_command_validation_message.cs" />
     <Compile Include="Commands\for_CommandResult\when_containing_one_validation_result.cs" />
@@ -107,6 +108,15 @@
     <Compile Include="Commands\for_CommandSecurityExtensions\when_specifying_a_specific_command_type.cs" />
     <Compile Include="Commands\for_CommandSecurityExtensions\when_handling.cs" />
     <Compile Include="Commands\for_CommandSecurityExtensions\when_specifying_namespace.cs" />
+    <Compile Include="Commands\for_CommandStatistics\when_recording_a_command_result_that_did_not_pass_security.cs" />
+    <Compile Include="Commands\for_CommandStatistics\when_recording_a_command_result_with_a_validation_error.cs" />
+    <Compile Include="Commands\for_CommandStatistics\when_recording_a_command_result_with_an_exception.cs" />
+    <Compile Include="Commands\for_CommandStatistics\given\a_command_statistics_with_registered_plugins.cs" />
+    <Compile Include="Commands\for_CommandStatistics\when_creating.cs" />
+    <Compile Include="Commands\for_CommandStatistics\Stubs.cs" />
+    <Compile Include="Commands\for_CommandStatistics\when_recording_a_command_result_that_was_handled.cs" />
+    <Compile Include="Commands\for_CommandStatistics\given\a_command_statistics.cs" />
+    <Compile Include="Commands\for_CommandStatistics\when_recording_a_null_command_result.cs" />
     <Compile Include="Commands\for_HandleCommandSecurityActionBuilder\when_targetting_commands.cs" />
     <Compile Include="Commands\for_CommandSecurityManager\given\a_command_security_manager.cs" />
     <Compile Include="Commands\for_CommandSecurityManager\when_authorizing_a_command.cs" />
@@ -129,6 +139,9 @@
     <Compile Include="Configuration\for_Configure\when_initializing.cs" />
     <Compile Include="Configuration\for_EventsConfiguration\given\an_events_configuration.cs" />
     <Compile Include="Configuration\for_EventsConfiguration\given\an_events_configuration_and_container_object.cs" />
+    <Compile Include="Configuration\for_StatisticsConfiguration\given\a_statistics_configuration_and_container.cs" />
+    <Compile Include="Configuration\for_StatisticsConfiguration\when_creating.cs" />
+    <Compile Include="Configuration\for_StatisticsConfiguration\when_setting_store_type_and_initializing.cs" />
     <Compile Include="Domain\for_AggregateRootRepository\given\a_repository_for_a_stateless_aggregate_root.cs" />
     <Compile Include="Domain\for_AggregateRootRepository\when_getting_a_stateful_aggregate_root_that_has_no_events.cs" />
     <Compile Include="Domain\for_AggregateRootRepository\when_getting_a_stateless_aggregate_root_that_has_events.cs" />
@@ -380,6 +393,13 @@
     <Compile Include="Security\for_TypeSecurable\when_checking_can_authorize_for_null_action.cs" />
     <Compile Include="Security\for_UserSecurityActorExtensions\when_user_must_be_in_multiple_roles.cs" />
     <Compile Include="Security\for_UserSecurityActorExtensions\when_user_must_be_in_role.cs" />
+    <Compile Include="Statistics\for_Statistic\when_setting_context_to_null.cs" />
+    <Compile Include="Statistics\for_Statistic\when_setting_context_and_recording.cs" />
+    <Compile Include="Statistics\for_Statistic\when_recording_without_context.cs" />
+    <Compile Include="Statistics\for_Statistic\when_creating_with_null_default_context.cs" />
+    <Compile Include="Statistics\for_Statistic\given\a_statistic.cs" />
+    <Compile Include="Statistics\for_Statistic\when_recording_two_categories_for_a_single_context.cs" />
+    <Compile Include="Statistics\for_Statistic\when_creating.cs" />
     <Compile Include="Tasks\for_TaskManager\when_starting_and_it_gets_done.cs" />
     <Compile Include="Tasks\for_TaskManager\when_progress_is_made_on_started_task.cs" />
     <Compile Include="Tasks\for_TaskRepository\when_deleting_task_by_id.cs" />
