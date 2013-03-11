@@ -21,6 +21,7 @@ using Bifrost.Entities;
 using Bifrost.Events;
 using Bifrost.Execution;
 using Bifrost.Sagas;
+using Bifrost.Security;
 
 namespace Bifrost.Configuration
 {
@@ -69,7 +70,51 @@ namespace Bifrost.Configuration
             BindEntityContextConfigurationInstance(configuration, container);
             container.Bind(typeof(IEntityContext<>), configuration.EntityContextType);
         }
-        
+
+        /// <summary>
+        /// Configures authorization strategy for instances of a type that does not have an explicit authorizer implemented
+        /// </summary>
+        /// <param name="configuration"><see cref="IEventsConfiguration"/> instance to configure</param>
+        /// <returns>Chained <see cref="ISecurityConfiguration"/> instance</returns>
+        public static ISecurityConfiguration SpecificInstancesOfAType(this ISecurityConfiguration configuration)
+        {
+            return configuration;
+        } 
+
+        /// <summary>
+        /// Configures the security to use the authorized by default strategy for accessing instances
+        /// </summary>
+        /// <param name="configuration"><see cref="ISecurityConfiguration"/> instance</param>
+        /// <returns>Chained <see cref="IConfigure"/> instance</returns>
+        public static IConfigure AreAuthorizedByDefault(this ISecurityConfiguration configuration)
+        {
+            configuration.DefaultInstanceAuthorizationStrategy = typeof (AuthorizedByDefaultInstanceAuthorizer);
+            return Configure.Instance;
+        }
+
+        /// <summary>
+        /// Configures the security to use the authorized by default strategy for accessing instances
+        /// </summary>
+        /// <param name="configuration"><see cref="ISecurityConfiguration"/> instance</param>
+        /// <returns>Chained <see cref="IConfigure"/> instance</returns>
+        public static IConfigure AreNotAuthorizedByDefault(this ISecurityConfiguration configuration)
+        {
+            configuration.DefaultInstanceAuthorizationStrategy = typeof(UnauthorizedByDefaultInstanceAuthorizer);
+            return Configure.Instance;
+        }
+
+	    /// <summary>
+	    /// Configures the security to use the authorized by default strategy for accessing instances
+	    /// </summary>
+	    /// <param name="configuration"><see cref="ISecurityConfiguration"/> instance</param>
+	    /// <param name="defaultInstanceAuthorizationStrategy"><see cref="IDefaultInstanceAuthorizationStrategy"/>strategy to use as default authorization of instances</param>
+	    /// <returns>Chained <see cref="IConfigure"/> instance</returns>
+	    public static IConfigure ByDefaultAreAuthorizedBy(this ISecurityConfiguration configuration, IDefaultInstanceAuthorizationStrategy defaultInstanceAuthorizationStrategy)
+        {
+            configuration.DefaultInstanceAuthorizationStrategy = defaultInstanceAuthorizationStrategy.GetType();
+            return Configure.Instance;
+        }
+
         static void BindEntityContextConfigurationInstance(IEntityContextConfiguration configuration, IContainer container)
         {
             var connectionType = configuration.Connection.GetType();

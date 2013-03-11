@@ -69,6 +69,12 @@ namespace Bifrost.Configuration
         /// Gets the configureation for serialization
         /// </summary>
         ISerializationConfiguration Serialization { get; }
+
+
+        /// <summary>
+        /// Gets the configureation for security
+        /// </summary>
+        ISecurityConfiguration Security { get; }
         
         /// <summary>
         /// Gets the configureation for the applications default storage

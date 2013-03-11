@@ -105,8 +105,10 @@
     <Compile Include="Configuration\IFrontendConfiguration.cs" />
     <Compile Include="Configuration\IFrontendTargetConfiguration.cs" />
     <Compile Include="Configuration\IHaveStorage.cs" />
+    <Compile Include="Configuration\ISecurityConfiguration.cs" />
     <Compile Include="Configuration\ITasksConfiguration.cs" />
     <Compile Include="Configuration\MissingDefaultConstructorException.cs" />
+    <Compile Include="Configuration\SecurityConfiguration.cs" />
     <Compile Include="Configuration\TasksConfiguration.cs" />
     <Compile Include="Configuration\ViewsConfiguration.cs" />
     <Compile Include="Configuration\IConfigure.cs" />
@@ -166,6 +168,7 @@
     <Compile Include="Sagas\SagaState.cs" />
     <Compile Include="Sagas\State.cs" />
     <Compile Include="Security\AccessToInstanceRule.cs" />
+    <Compile Include="Security\AuthorizedByDefaultInstanceAuthorizer.cs" />
     <Compile Include="Security\AuthorizeDescriptorResult.cs" />
     <Compile Include="Security\AuthorizationResult.cs" />
     <Compile Include="Security\AuthorizeActionResult.cs" />
@@ -173,9 +176,12 @@
     <Compile Include="Security\AuthorizeSecurableResult.cs" />
     <Compile Include="Security\AuthorizeTargetResult.cs" />
     <Compile Include="Security\DefaultInstanceAuthorizer.cs" />
+    <Compile Include="Security\IDefaultInstanceAuthorizer.cs" />
     <Compile Include="Security\IInstanceAuthorizationService.cs" />
     <Compile Include="Security\IInstanceAuthorizer.cs" />
+    <Compile Include="Security\IInstanceAuthorizerProvider.cs" />
     <Compile Include="Security\InstanceAuthorizationService.cs" />
+    <Compile Include="Security\InstanceAuthorizerProvider.cs" />
     <Compile Include="Security\InstanceSecurable.cs" />
     <Compile Include="Security\InstanceSecurityActor.cs" />
     <Compile Include="Security\InstanceSecurityActorExtensions.cs" />
@@ -204,6 +210,7 @@
     <Compile Include="Security\SecurityActor.cs" />
     <Compile Include="Security\SecurityTarget.cs" />
     <Compile Include="Security\TypeSecurable.cs" />
+    <Compile Include="Security\UnauthorizedByDefaultInstanceAuthorizer.cs" />
     <Compile Include="Security\UserSecurityActor.cs" />
     <Compile Include="Security\UserSecurityActorExtensions.cs" />
     <Compile Include="Serialization\SerializationOptions.cs" />

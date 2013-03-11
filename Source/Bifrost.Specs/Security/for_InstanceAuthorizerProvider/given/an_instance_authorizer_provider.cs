@@ -23,7 +23,7 @@ namespace Bifrost.Specs.Security.for_InstanceAuthorizerProvider.given
                 container.Setup(c => c.Get(typeof(StatefulAggregateRootAuthorizer))).Returns(new StatefulAggregateRootAuthorizer());
                 container.Setup(c => c.Get(typeof(StatelessAggregateRootAuthorizer))).Returns(new StatelessAggregateRootAuthorizer());
 
-                provider = new InstanceAuthorizerProvider(container.Object, type_discoverer.Object);
+                provider = new InstanceAuthorizerProvider(container.Object, type_discoverer.Object, new AuthorizedByDefaultInstanceAuthorizer());
             };
     }
 }

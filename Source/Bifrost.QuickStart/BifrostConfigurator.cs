@@ -17,6 +17,8 @@ namespace Bifrost.QuickStart
                     .Asynchronous(e=>e.UsingSignalR())
                 .DefaultStorage
                     .UsingRavenDBEmbedded(e=>e.LocatedAt(dataPath))
+                .Security
+                    .SpecificInstancesOfAType().AreAuthorizedByDefault()
                 .Frontend
                     .Web(w=>w.AsSinglePageApplication())
                 .WithMimir();

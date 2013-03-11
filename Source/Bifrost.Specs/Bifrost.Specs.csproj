@@ -131,6 +131,9 @@
     <Compile Include="Configuration\for_Configure\when_initializing.cs" />
     <Compile Include="Configuration\for_EventsConfiguration\given\an_events_configuration.cs" />
     <Compile Include="Configuration\for_EventsConfiguration\given\an_events_configuration_and_container_object.cs" />
+    <Compile Include="Configuration\for_SecurityConfiguration\given\a_security_configuration.cs" />
+    <Compile Include="Configuration\for_SecurityConfiguration\when_inititalizing_without_default_authorization_strategy.cs" />
+    <Compile Include="Configuration\for_SecurityConfiguration\when_inititalizing_with_specified_default_authorization_strategy.cs" />
     <Compile Include="Domain\for_AggregateRootRepository\given\a_repository_for_a_stateless_aggregate_root.cs" />
     <Compile Include="Domain\for_AggregateRootRepository\when_getting_a_stateful_aggregate_root_that_has_no_events.cs" />
     <Compile Include="Domain\for_AggregateRootRepository\when_getting_a_stateless_aggregate_root_that_has_events.cs" />
@@ -337,6 +340,9 @@
     <Compile Include="Security\for_AuthorizeActionResult\when_building_the_failed_authorization_messages.cs" />
     <Compile Include="Security\for_AuthorizeActorResult\when_building_the_failed_authorization_messages.cs" />
     <Compile Include="Security\for_AuthorizeSecurableResult\when_building_the_failed_authorization_messages.cs" />
+    <Compile Include="Security\for_DefaultInstanceAuthorizer\given\a_default_instance_authorizer.cs" />
+    <Compile Include="Security\for_DefaultInstanceAuthorizer\when_authorizing.cs" />
+    <Compile Include="Security\for_DefaultInstanceAuthorizer\when_checking_can_authorize.cs" />
     <Compile Include="Security\for_InstanceAuthorizationService\given\an_instance_authorization_service.cs" />
     <Compile Include="Security\for_InstanceAuthorizationService\when_authorizing_an_instance.cs" />
     <Compile Include="Security\for_InstanceAuthorizerProvider\given\an_instance_authorizer_provider.cs" />
@@ -364,7 +370,8 @@
     <Compile Include="Security\for_SecurityActor\when_authorizing_action_that_breaks_a_security_rule.cs" />
     <Compile Include="Security\for_SecurityActor\when_authorizing_action_that_breaks_no_security_rules.cs" />
     <Compile Include="Security\for_SecurityActor\when_authorizing_action_with_a_rule_that_causes_an_error.cs" />
-    <Compile Include="Security\for_SecurityDescriptor\given\a_configured_security_descriptor.cs" />
+    <Compile Include="Security\for_SecurityDescriptor\given\a_configured_security_descriptor_for_commands.cs" />
+    <Compile Include="Security\for_SecurityDescriptor\given\a_configured_security_descriptor_for_stateful_aggregate_roots.cs" />
     <Compile Include="Security\for_SecurityDescriptor\when_adding_an_action.cs" />
     <Compile Include="Security\for_SecurityDescriptor\when_authorizing_on_command_in_secured_namespace_and_user_is_in_role.cs" />
     <Compile Include="Security\for_SecurityDescriptor\when_authorizing_on_command_in_secured_namespace_and_user_is_not_in_role.cs" />

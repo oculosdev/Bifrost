@@ -225,6 +225,9 @@
     <Compile Include="..\Bifrost\Configuration\ISagasConfiguration.cs">
       <Link>Configuration\ISagasConfiguration.cs</Link>
     </Compile>
+    <Compile Include="..\Bifrost\Configuration\ISecurityConfiguration.cs">
+      <Link>Security\ISecurityConfiguration.cs</Link>
+    </Compile>
     <Compile Include="..\Bifrost\Configuration\ISerializationConfiguration.cs">
       <Link>Configuration\ISerializationConfiguration.cs</Link>
     </Compile>
@@ -645,6 +648,9 @@
     <Compile Include="..\Bifrost\Sagas\State.cs">
       <Link>Sagas\State.cs</Link>
     </Compile>
+    <Compile Include="..\Bifrost\Security\AccessToInstanceRule.cs">
+      <Link>Security\AccessToInstanceRule.cs</Link>
+    </Compile>
     <Compile Include="..\Bifrost\Security\AuthorizationResult.cs">
       <Link>Security\AuthorizationResult.cs</Link>
     </Compile>
@@ -653,6 +659,9 @@
     </Compile>
     <Compile Include="..\Bifrost\Security\AuthorizeActorResult.cs">
       <Link>Security\AuthorizeActorResult.cs</Link>
+    </Compile>
+    <Compile Include="..\Bifrost\Security\AuthorizedByDefaultInstanceAuthorizer.cs">
+      <Link>Security\AuthorizedByDefaultInstanceAuthorizer.cs</Link>
     </Compile>
     <Compile Include="..\Bifrost\Security\AuthorizeDescriptorResult.cs">
       <Link>Security\AuthorizeDescriptorResult.cs</Link>
@@ -666,8 +675,35 @@
     <Compile Include="..\Bifrost\Security\BaseSecurityDescriptor.cs">
       <Link>Security\BaseSecurityDescriptor.cs</Link>
     </Compile>
+    <Compile Include="..\Bifrost\Security\DefaultInstanceAuthorizer.cs">
+      <Link>Security\DefaultInstanceAuthorizer.cs</Link>
+    </Compile>
+    <Compile Include="..\Bifrost\Security\IDefaultInstanceAuthorizer.cs">
+      <Link>Security\IDefaultInstanceAuthorizer.cs</Link>
+    </Compile>
+    <Compile Include="..\Bifrost\Security\IInstanceAuthorizationService.cs">
+      <Link>Security\IInstanceAuthorizationService.cs</Link>
+    </Compile>
+    <Compile Include="..\Bifrost\Security\IInstanceAuthorizer.cs">
+      <Link>Security\IInstanceAuthorizer.cs</Link>
+    </Compile>
+    <Compile Include="..\Bifrost\Security\IInstanceAuthorizerProvider.cs">
+      <Link>Security\IInstanceAuthorizerProvider.cs</Link>
+    </Compile>
+    <Compile Include="..\Bifrost\Security\InstanceAuthorizationService.cs">
+      <Link>Security\InstanceAuthorizationService.cs</Link>
+    </Compile>
+    <Compile Include="..\Bifrost\Security\InstanceAuthorizerProvider.cs">
+      <Link>Security\InstanceAuthorizerProvider.cs</Link>
+    </Compile>
     <Compile Include="..\Bifrost\Security\InstanceSecurable.cs">
       <Link>Security\InstanceSecurable.cs</Link>
+    </Compile>
+    <Compile Include="..\Bifrost\Security\InstanceSecurityActor.cs">
+      <Link>Security\InstanceSecurityActor.cs</Link>
+    </Compile>
+    <Compile Include="..\Bifrost\Security\InstanceSecurityActorExtensions.cs">
+      <Link>Security\InstanceSecurityActorExtensions.cs</Link>
     </Compile>
     <Compile Include="..\Bifrost\Security\ISecurable.cs">
       <Link>Security\ISecurable.cs</Link>
@@ -743,6 +779,9 @@
     </Compile>
     <Compile Include="..\Bifrost\Security\TypeSecurable.cs">
       <Link>Security\TypeSecurable.cs</Link>
+    </Compile>
+    <Compile Include="..\Bifrost\Security\UnauthorizedByDefaultInstanceAuthorizer.cs">
+      <Link>Security\UnauthorizedByDefaultInstanceAuthorizer.cs</Link>
     </Compile>
     <Compile Include="..\Bifrost\Security\UserSecurityActor.cs">
       <Link>Security\UserSecurityActor.cs</Link>

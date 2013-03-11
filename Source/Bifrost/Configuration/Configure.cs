@@ -160,6 +160,7 @@ namespace Bifrost.Configuration
 		public CultureInfo Culture { get; set; }
 		public CultureInfo UICulture { get; set; }
         public BindingLifecycle DefaultObjectLifecycle { get; set; }
+        public ISecurityConfiguration Security { get; set; }
 
         public void Initialize()
         {
@@ -174,6 +175,7 @@ namespace Bifrost.Configuration
             Frontend.Initialize(Container);
         	InitializeCulture();
             DefaultStorage.Initialize(Container);
+            Security.Initialize(Container);
         }
 #pragma warning restore 1591 // Xml Comments
 
@@ -189,6 +191,7 @@ namespace Bifrost.Configuration
 			Serialization = Container.Get<ISerializationConfiguration>();
             DefaultStorage = Container.Get<IDefaultStorageConfiguration>();
             Frontend = Container.Get<IFrontendConfiguration>();
+            Security = Container.Get<ISecurityConfiguration>();
         }
 
 		void InitializeCulture()
