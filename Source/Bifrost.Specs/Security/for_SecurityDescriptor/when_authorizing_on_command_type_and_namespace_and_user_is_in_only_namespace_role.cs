@@ -9,7 +9,7 @@ using Machine.Specifications;
 namespace Bifrost.Specs.Security.for_SecurityDescriptor
 {
     [Subject(typeof(BaseSecurityDescriptor))]
-    public class when_authorizing_on_command_type_and_namespace_and_user_is_in_only_namespace_role : given.a_configured_security_descriptor
+    public class when_authorizing_on_command_type_and_namespace_and_user_is_in_only_namespace_role : given.a_configured_security_descriptor_for_commands
     {
         static AuthorizeDescriptorResult authorize_descriptor_result;
         static IEnumerable<string> authorization_messages;
@@ -18,7 +18,7 @@ namespace Bifrost.Specs.Security.for_SecurityDescriptor
             {
                 Thread.CurrentPrincipal = new GenericPrincipal(new GenericIdentity(""), new[]
                     {
-                        Testing.Fakes.Security.SecurityDescriptor.NAMESPACE_ROLE
+                        Testing.Fakes.Security.SecurityDescriptorForCommands.NAMESPACE_ROLE
                     });
             };
 
@@ -29,7 +29,7 @@ namespace Bifrost.Specs.Security.for_SecurityDescriptor
             };
 
         It should_not_be_authorized = () => authorize_descriptor_result.IsAuthorized.ShouldBeFalse();
-        It should_indicate_that_the_user_is_not_in_the_required_role = () => authorization_messages.First().IndexOf(Testing.Fakes.Security.SecurityDescriptor.SIMPLE_COMMAND_ROLE).ShouldBeGreaterThan(0);
+        It should_indicate_that_the_user_is_not_in_the_required_role = () => authorization_messages.First().IndexOf(Testing.Fakes.Security.SecurityDescriptorForCommands.SIMPLE_COMMAND_ROLE).ShouldBeGreaterThan(0);
         It should_indicate_the_secured_type = () => authorization_messages.First().IndexOf(typeof(SimpleCommand).FullName).ShouldBeGreaterThan(0);
     }
 }

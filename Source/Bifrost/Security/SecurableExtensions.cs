@@ -36,5 +36,17 @@ namespace Bifrost.Security
             securable.AddActor(actor);
             return actor;
         }
+
+        /// <summary>
+        /// Define an instance actor for a <see cref="ISecurable">securable</see>
+        /// </summary>
+        /// <param name="securable"><see cref="ISecurable"/> to secure</param>
+        /// <returns>The <see cref="InstanceSecurityActor"/></returns>
+        public static InstanceSecurityActor Instance(this ISecurable securable)
+        {
+            var actor = new InstanceSecurityActor();
+            securable.AddActor(actor);
+            return actor;
+        }
     }
 }

@@ -91,7 +91,8 @@
     <Compile Include="Fakes\Sagas\TransitionalChapter.cs" />
     <Compile Include="Fakes\Security\FakeAuthorizationResult.cs" />
     <Compile Include="Fakes\Security\MySecurityAction.cs" />
-    <Compile Include="Fakes\Security\SecurityDescriptor.cs" />
+    <Compile Include="Fakes\Security\SecurityDescriptorForCommands.cs" />
+    <Compile Include="Fakes\Security\SecurityDescriptorForStatefulAggregateRoot.cs" />
     <Compile Include="Fakes\Security\StatefulAggregateRootAuthorizer.cs" />
     <Compile Include="Fakes\Security\StatelessAggregateRootAuthorizer.cs" />
     <Compile Include="Properties\AssemblyInfo.cs" />
