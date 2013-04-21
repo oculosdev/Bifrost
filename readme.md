@@ -18,3 +18,4 @@ Try to follow the general style of naming and structure that's already in place 
 ### Testing
 We expect any code going through to a pull request to be tested.
 All our testing is done through MSpec specifications (C#), or JasmineBDD (JavaScript). 
+
