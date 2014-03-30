@@ -21,6 +21,14 @@ namespace Bifrost.Validation
         /// <param name="propertyTypesAndValidators">A collection of dynamically discovered validators to use</param>
         public ComposedCommandBusinessValidator(IDictionary<Type, IEnumerable<IValidator>> propertyTypesAndValidators)
         {
+            var validatorDescriptorType = typeof(ValidatorDescriptor<>).MakeGenericType(typeof(T));
+            var validatorsField = typeof(AbstractValidator<T>).GetField("nestedValidators", BindingFlags.NonPublic | BindingFlags.Instance);
+            IEnumerable<IValidationRule> validationRules;
+            if (validatorsField != null)
+                validationRules = validatorsField.GetValue(this) as IEnumerable<IValidationRule>;
+            else
+                validationRules = new IValidationRule[0];
+
             foreach (var propertyType in propertyTypesAndValidators.Keys)
             {
                 var validators = propertyTypesAndValidators[propertyType];
@@ -28,21 +36,26 @@ namespace Bifrost.Validation
                 if (validators == null || !validators.Any()) 
                     continue;
 
-                var validator = GetValidator(validators);
-
                 var properties = GetPropertiesWithType(propertyType);
                 foreach (var property in properties)
                 {
                     var expression = BuildGetExpression(property);
+                    var validator = GetValidator(property.Name, validators);
+
+                    var rulesBefore = new List<IValidationRule>(validationRules);
+
                     RuleFor(expression)
                         .DynamicValidationRule(validator, property.Name);
+
+                    var newRules = validationRules.Except(rulesBefore);
+                    validator.SetRules(newRules);
                 }
             }
         }
 
-        IValidator GetValidator(IEnumerable<IValidator> propertyTypesAndValidator)
+        ComposedValidator<IAmValidatable> GetValidator(string propertyName, IEnumerable<IValidator> propertyTypesAndValidator)
         {
-            return new ComposedValidator<IAmValidatable>(propertyTypesAndValidator);
+            return new ComposedValidator<IAmValidatable>(propertyName, propertyTypesAndValidator);
         }
 
         IEnumerable<PropertyInfo> GetPropertiesWithType(Type propertyType)

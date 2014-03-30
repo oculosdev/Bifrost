@@ -12,11 +12,12 @@ namespace Bifrost.Extensions
         /// 
         /// </summary>
         /// <typeparam name="T"></typeparam>
+        /// <typeparam name="TV"></typeparam>
         /// <param name="ruleBuilder"></param>
         /// <param name="validator"></param>
         /// <param name="name"></param>
         /// <returns></returns>
-        public static IRuleBuilderOptions<T, IAmValidatable> DynamicValidationRule<T>(this IRuleBuilder<T, IAmValidatable> ruleBuilder, IValidator validator, string name)
+        public static IRuleBuilderOptions<T, TV> DynamicValidationRule<T, TV>(this IRuleBuilder<T, TV> ruleBuilder, IValidator validator, string name) where TV: IAmValidatable
         {
 #pragma warning disable 0618
             return ruleBuilder

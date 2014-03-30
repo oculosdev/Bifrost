@@ -64,7 +64,7 @@ namespace Bifrost.Validation.MetaData
             return metaData;
         }
 
-        void GetValue(IValidator inputValidator, ValidationMetaData metaData, string parentKey, bool isParentConcept = false, bool isParentModelRule = false)
+        void GetValue(IValidator inputValidator, ValidationMetaData metaData, string parentKey, bool isParentConcept = false, bool isParentModelRule = false, Type parentType = null)
         {
             var inputValidatorType = inputValidator.GetType();
 #if(NETFX_CORE)
@@ -93,15 +93,19 @@ namespace Bifrost.Validation.MetaData
                         if (validator is ChildValidatorAdaptor)
                         {
                             var isConcept = false;
-                            
+
+                            Type holdingType = parentType;
                             if (genericArguments.Length == 1)
                             {
-                                var type = isModelRule ? genericArguments[0] : GetPropertyInfo(genericArguments[0], member.Key).PropertyType;
+                                if( !genericArguments[0].IsConcept() ) holdingType = genericArguments[0];
+                                var propertyInfo = GetPropertyInfo(genericArguments[0], member.Key);
+                                if( propertyInfo == null ) propertyInfo = GetPropertyInfo(parentType, member.Key);
+                                var type = isModelRule ? genericArguments[0] : propertyInfo.PropertyType;
                                 isConcept = type.IsConcept();
                             }
 
                             var childValidator = (validator as ChildValidatorAdaptor).Validator;
-                            GetValue(childValidator, metaData, currentKey, isConcept, isModelRule);
+                            GetValue(childValidator, metaData, currentKey, isConcept, isModelRule, holdingType);
                         }
                         else if (validator is IPropertyValidator)
                         {
