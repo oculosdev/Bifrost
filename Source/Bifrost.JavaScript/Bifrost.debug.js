@@ -2342,8 +2342,9 @@ Bifrost.namespace("Bifrost", {
             var promise = Bifrost.execution.Promise.create();
             if (typeof self.scripts === "undefined" ||
                 self.scripts.length == 0) {
-
+                
                 server.get("/Bifrost/AssetsManager", { extension: "js" }).continueWith(function (result) {
+                    self.scripts = result;
                     Bifrost.namespaces.create().initialize();
                     promise.signal();
                 });
@@ -2352,13 +2353,16 @@ Bifrost.namespace("Bifrost", {
             }
             return promise;
         };
+
         this.initializeFromAssets = function(assets) {
             self.scripts = assets;
             Bifrost.namespaces.create().initialize();
         };
+
         this.getScripts = function () {
             return self.scripts;
         };
+
         this.hasScript = function(script) {
             var found = false;
             self.scripts.some(function (scriptInSystem) {
