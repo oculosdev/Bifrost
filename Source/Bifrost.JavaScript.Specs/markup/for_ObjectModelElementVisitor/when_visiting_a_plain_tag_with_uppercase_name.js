@@ -1,7 +1,11 @@
 describe("when visiting a plain tag with uppercase name", function() {
 	var objectModelManager = {
-		getObjectFromTagName: sinon.stub()
-
+	    canResolve: sinon.stub().returns(true),
+	    beginResolve: sinon.stub().returns({
+	        continueWith: function (callback) {
+	            
+	        }
+	    })
 	};
 
 	var visitor = Bifrost.markup.ObjectModelElementVisitor.create({
@@ -14,6 +18,6 @@ describe("when visiting a plain tag with uppercase name", function() {
 	visitor.visit(element);
 
 	it("should ask for an object by tag name", function() {
-		expect(objectModelManager.getObjectFromTagName.calledWith("something")).toBe(true);
+	    expect(objectModelManager.beginResolve.calledWith("something")).toBe(true);
 	});
 });

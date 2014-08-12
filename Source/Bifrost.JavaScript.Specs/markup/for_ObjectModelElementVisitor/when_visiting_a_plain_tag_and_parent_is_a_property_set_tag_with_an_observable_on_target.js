@@ -1,7 +1,12 @@
 describe("when visiting a plain tag and parent is a property set tag with an observable on target", function() {
 	var instance = { some: "instance"};
 	var objectModelManager = {
-		getObjectFromTagName: sinon.stub().returns(instance)
+	    canResolve: sinon.stub().returns(true),
+	    beginResolve: sinon.stub().returns({
+	        continueWith: function (callback) {
+	            callback(instance);
+	        }
+	    })
 	};
 
 	var visitor = Bifrost.markup.ObjectModelElementVisitor.create({
@@ -19,7 +24,7 @@ describe("when visiting a plain tag and parent is a property set tag with an obs
 	visitor.visit(element);
 
 	it("should ask for an object by tag name", function() {
-		expect(objectModelManager.getObjectFromTagName.calledWith("somethingelse")).toBe(true);
+	    expect(objectModelManager.beginResolve.calledWith("somethingelse")).toBe(true);
 	});
 
 	it("should set the object instance to the parent elements object model node", function() {

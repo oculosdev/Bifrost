@@ -1,63 +1,27 @@
 Bifrost.namespace("Bifrost.markup", {
-	objectModelManager: Bifrost.Singleton(function() {
+	objectModelManager: Bifrost.Singleton(function(assetsManager) {
 		var self = this;
-		this.globalNamespacePrefix = "__global";
 
-		this.prefixNamespaceArrayDictionary = {};
+		this.canResolve = function (name, namespace) {
+		    // Map the namespace to path
+            // Is there a JS file for the name in that namespace - if so, return true, if not - don't bother
 
-		this.registerNamespace = function(prefix, namespace) {
-			var ns = Bifrost.namespace(namespace);
-			var array;
-
-			if( self.prefixNamespaceArrayDictionary.hasOwnProperty(prefix) ) {
-				array = self.prefixNamespaceArrayDictionary[prefix];
-			} else {
-				array = [];
-				self.prefixNamespaceArrayDictionary[prefix] = array;
-			}
-			self.prefixNamespaceArrayDictionary[prefix].push(namespace);
+		    return false;
 		};
 
+		this.beginResolve = function (name, namespace) {
+		    var promise = Bifrost.execution.Promise.create();
 
-		this.getObjectFromTagName =  function(name, namespace) {
-			var hasNamespace = true;
-			if( Bifrost.isNullOrUndefined(namespace) ) {
-				namespace = self.globalNamespacePrefix;
-				hasNamespace = false;
-			}
-			namespace = namespace.toLowerCase();
-			name = name.toLowerCase();
+		    // Map the namespace to path
+		    // Add JS file to array for loading
+		    // AssetsManager: If there is a HTML file, add it for loading if its not already loaded
+		    // AssetsManager: If there is a CSS file, add it for loading
 
-			var foundType = null;
+		    // Execute FileLoadTask - region... 
 
-			if( self.prefixNamespaceArrayDictionary.hasOwnProperty(namespace) ) {
-			    self.prefixNamespaceArrayDictionary[namespace].forEach(function (ns) {
-			        var namespace = Bifrost.namespace(ns);
-			        for (var type in namespace) {
-			            type = type.toLowerCase();
-			            if (type == name) {
-			                foundType = type;
-			                return;
-			            }
-			        }
-				})
-			}
+            // When loaded - if not of Element type - throw exception
 
-			if (foundType !== null) {
-			    var instance = foundType.create();
-			    return instance;
-			}
-
-            /*
-			if( foundType == null ) {
-				var namespaceMessage = "";
-				if( hasNamespace == true ) {
-					namespaceMessage = " in namespace prefixed '"+namespace+"'";
-				}
-				throw "Could not resolve type '"+name+"'"+namespaceMessage;
-			}*/
-
-			return null;
+		    return promise;
 		};
 	})
 });

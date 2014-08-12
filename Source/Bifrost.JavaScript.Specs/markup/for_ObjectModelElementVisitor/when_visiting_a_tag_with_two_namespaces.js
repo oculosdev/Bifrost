@@ -1,8 +1,7 @@
 describe("when visiting a tag with two namespaces", function() {
-	var objectModelManager = {
-		getObjectFromTagName: sinon.stub()
-
-	};
+    var objectModelManager = {
+        canResolve: sinon.stub().returns(false),
+    };
 
 	var visitor = Bifrost.markup.ObjectModelElementVisitor.create({
 		objectModelManager: objectModelManager,

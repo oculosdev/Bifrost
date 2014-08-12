@@ -4,7 +4,12 @@ describe("when visiting a plain tag with an attribute matching observable proper
 	};
 
 	var objectModelManager = {
-		getObjectFromTagName: sinon.stub().returns(obj)
+	    canResolve: sinon.stub().returns(true),
+	    beginResolve: sinon.stub().returns({
+	        continueWith: function (callback) {
+	            callback(obj);
+	        }
+	    })
 	};
 	var typeConverters = {
 		convert: sinon.stub().returns(42)

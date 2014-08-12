@@ -1,7 +1,11 @@
 describe("when visiting a tag with namespace", function() {
-	var objectModelManager = {
-		getObjectFromTagName: sinon.stub()
-	};
+    var objectModelManager = {
+        canResolve: sinon.stub().returns(true),
+        beginResolve: sinon.stub().returns({
+            continueWith: function (callback) {
+            }
+        })
+    };
 
 	var visitor = Bifrost.markup.ObjectModelElementVisitor.create({
 		objectModelManager: objectModelManager,
@@ -13,6 +17,6 @@ describe("when visiting a tag with namespace", function() {
 	visitor.visit(element);
 
 	it("should ask for an object by tag name and namespace", function() {
-		expect(objectModelManager.getObjectFromTagName.calledWith("something","ns")).toBe(true);
+		expect(objectModelManager.beginResolve.calledWith("something","ns")).toBe(true);
 	});
 });
