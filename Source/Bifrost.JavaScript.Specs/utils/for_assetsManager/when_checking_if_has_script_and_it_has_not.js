@@ -1,6 +1,7 @@
 ﻿describe("when checking if has script and it has not", function () {
     var result = false;
-    var assetsManager = Bifrost.assetsManager.createWithoutScope();
+    var server = {};
+    var assetsManager = Bifrost.assetsManager.createWithoutScope({ server: server });
     assetsManager.scripts = ["something.js", "thestuff.js"];
     var result = assetsManager.hasScript("missing.js");
 

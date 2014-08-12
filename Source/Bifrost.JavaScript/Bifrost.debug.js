@@ -2334,20 +2334,19 @@ Bifrost.namespace("Bifrost", {
     })
 });
 Bifrost.namespace("Bifrost", {
-    assetsManager: Bifrost.Singleton(function() {
+    assetsManager: Bifrost.Singleton(function(server) {
         
         var self = this;
         this.scripts = [];
         this.initialize = function () {
             var promise = Bifrost.execution.Promise.create();
-            if (typeof Bifrost.assetsManager.scripts === "undefined" ||
-                Bifrost.assetsManager.scripts.length == 0) {
+            if (typeof self.scripts === "undefined" ||
+                self.scripts.length == 0) {
 
-                $.get("/Bifrost/AssetsManager", { extension: "js" }, function (result) {
-                    self.scripts = result;
+                server.get("/Bifrost/AssetsManager", { extension: "js" }).continueWith(function (result) {
                     Bifrost.namespaces.create().initialize();
                     promise.signal();
-                }, "json");
+                });
             } else {
                 promise.signal();
             }

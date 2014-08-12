@@ -5,29 +5,28 @@
     var promiseCalled = false;
     var nameSpaceInitializedStub;
 
-    beforeEach(function () {
-        nameSpaceInitializedStub = sinon.stub();
+    nameSpaceInitializedStub = sinon.stub();
 
-        var assetsManager = Bifrost.assetsManager.createWithoutScope();
+    var server = {
+        get: function () {
+            return {
+                continueWith: function(callback) {
+                    callback(scripts);
+                }
+            }
+        }
+    };
+    
+    Bifrost.namespaces = Bifrost.namespaces || {};
+    Bifrost.namespaces.create = function () { return { initialize: nameSpaceInitializedStub }; };
 
-        assetsManager.scripts = undefined;
-        Bifrost.namespaces = Bifrost.namespaces || {};
-        Bifrost.namespaces.create = function () { return { initialize: nameSpaceInitializedStub }; };
-        sinon.stub($, "get", function (url, parameters, callback) {
-            extension = parameters.extension;
-            callback(scripts);
-        });
-
-        assetsManager.initialize().continueWith(function () {
-            promiseCalled = true;
-        });
-
-        scriptsReturned = assetsManager.getScripts();
+    var assetsManager = Bifrost.assetsManager.createWithoutScope({ server: server });
+    assetsManager.scripts = undefined;
+    assetsManager.initialize().continueWith(function () {
+        promiseCalled = true;
     });
 
-    afterEach(function () {
-        $.get.restore();
-    });
+    scriptsReturned = assetsManager.getScripts();
 
     it("should get scripts", function () {
         expect(scriptsReturned).toBe(scripts);

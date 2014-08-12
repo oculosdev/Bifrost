@@ -2,39 +2,40 @@
     var self = this;
     var paths = [];
 
-    beforeEach(function () {
-        Bifrost.namespaces = Bifrost.namespaces || {};
-        Bifrost.namespaces.initialize = sinon.stub();
-        sinon.stub($, "get", function (url, options, callback, type) {
-            callback([
-                "Something/cool.js",
-                "Something/cooler.js",
-                "Else/cool.js",
-                "Else/cooler.js"
-            ]);
-        });
+    var server = {
+        get: function () {
+            return {
+                continueWith: function(callback) {
+                    callback([
+                        "Something/cool.js",
+                        "Something/cooler.js",
+                        "Else/cool.js",
+                        "Else/cooler.js"
+                    ]);
 
-        Bifrost.path = {
-            getPathWithoutFilename: function (path) {
-                if (path.indexOf("Something") == 0) {
-                    return "Something";
-                }
-
-                if (path.indexOf("Else") == 0) {
-                    return "Else";
                 }
             }
         }
+    };
 
-        var assetsManager = Bifrost.assetsManager.createWithoutScope();
-        assetsManager.initialize();
-        paths = assetsManager.getScriptPaths();
-    });
+    Bifrost.path = {
+        getPathWithoutFilename: function (path) {
+            if (path.indexOf("Something") == 0) {
+                return "Something";
+            }
 
-    afterEach(function () {
-        $.get.restore();
-    });
+            if (path.indexOf("Else") == 0) {
+                return "Else";
+            }
+        }
+    }
 
+    Bifrost.namespaces = Bifrost.namespaces || {};
+    Bifrost.namespaces.initialize = sinon.stub();
+
+    var assetsManager = Bifrost.assetsManager.createWithoutScope({ server: server });
+    assetsManager.initialize();
+    paths = assetsManager.getScriptPaths();
 
     this.getCountFor = function (path) {
         var count = 0;
