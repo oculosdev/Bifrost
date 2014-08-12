@@ -7,7 +7,10 @@
 
     beforeEach(function () {
         nameSpaceInitializedStub = sinon.stub();
-        Bifrost.assetsManager.scripts = undefined;
+
+        var assetsManager = Bifrost.assetsManager.createWithoutScope();
+
+        assetsManager.scripts = undefined;
         Bifrost.namespaces = Bifrost.namespaces || {};
         Bifrost.namespaces.create = function () { return { initialize: nameSpaceInitializedStub }; };
         sinon.stub($, "get", function (url, parameters, callback) {
@@ -15,16 +18,15 @@
             callback(scripts);
         });
 
-        Bifrost.assetsManager.initialize().continueWith(function () {
+        assetsManager.initialize().continueWith(function () {
             promiseCalled = true;
         });
 
-        scriptsReturned = Bifrost.assetsManager.getScripts();
+        scriptsReturned = assetsManager.getScripts();
     });
 
     afterEach(function () {
         $.get.restore();
-        Bifrost.assetsManager.scripts = undefined;
     });
 
     it("should get scripts", function () {

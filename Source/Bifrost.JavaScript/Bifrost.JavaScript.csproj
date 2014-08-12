@@ -61,6 +61,9 @@
     <Content Include="mapping\maps.js" />
     <Content Include="mapping\MissingPropertyStrategy.js" />
     <Content Include="mapping\PropertyMap.js" />
+    <Content Include="markup\ParentTagNameMismatched.js" />
+    <Content Include="markup\MultiplePropertyReferencesNotAllowed.js" />
+    <Content Include="markup\MultipleNamespacesInNameNotAllowed.js" />
     <Content Include="rules\And.js" />
     <Content Include="rules\Or.js" />
     <Content Include="rules\Rule.js" />

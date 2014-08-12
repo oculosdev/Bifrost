@@ -1,12 +1,15 @@
 ﻿Bifrost.namespace("Bifrost", {
-    assetsManager: {
-        initialize: function () {
+    assetsManager: Bifrost.Singleton(function() {
+        
+        var self = this;
+        this.scripts = [];
+        this.initialize = function () {
             var promise = Bifrost.execution.Promise.create();
             if (typeof Bifrost.assetsManager.scripts === "undefined" ||
                 Bifrost.assetsManager.scripts.length == 0) {
 
                 $.get("/Bifrost/AssetsManager", { extension: "js" }, function (result) {
-                    Bifrost.assetsManager.scripts = result;
+                    self.scripts = result;
                     Bifrost.namespaces.create().initialize();
                     promise.signal();
                 }, "json");
@@ -14,17 +17,17 @@
                 promise.signal();
             }
             return promise;
-        },
-        initializeFromAssets: function(assets) {
-            Bifrost.assetsManager.scripts = assets;
+        };
+        this.initializeFromAssets = function(assets) {
+            self.scripts = assets;
             Bifrost.namespaces.create().initialize();
-        },
-        getScripts: function () {
-            return Bifrost.assetsManager.scripts;
-        },
-        hasScript: function(script) {
+        };
+        this.getScripts = function () {
+            return self.scripts;
+        };
+        this.hasScript = function(script) {
             var found = false;
-            Bifrost.assetsManager.scripts.some(function (scriptInSystem) {
+            self.scripts.some(function (scriptInSystem) {
                 if (scriptInSystem === script) {
                     found = true;
                     return;
@@ -32,17 +35,18 @@
             });
 
             return found;
-        },
-        getScriptPaths: function () {
+        };
+
+        this.getScriptPaths = function () {
             var paths = [];
 
-            Bifrost.assetsManager.scripts.forEach(function (fullPath) {
+            self.scripts.forEach(function (fullPath) {
                 var path = Bifrost.Path.getPathWithoutFilename(fullPath);
                 if (paths.indexOf(path) == -1) {
                     paths.push(path);
                 }
             });
             return paths;
-        }
-    }
+        };
+    })
 });

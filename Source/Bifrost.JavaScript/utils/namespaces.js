@@ -1,5 +1,5 @@
 Bifrost.namespace("Bifrost", {
-    namespaces: Bifrost.Singleton(function() {
+    namespaces: Bifrost.Singleton(function(assetsManager) {
         var self = this;
 
         this.stripPath = function (path) {
@@ -13,7 +13,7 @@ Bifrost.namespace("Bifrost", {
         };
 
         this.initialize = function () {
-            var scripts = Bifrost.assetsManager.getScripts();
+            var scripts = assetsManager.getScripts();
             if (typeof scripts === "undefined") return;
 
             scripts.forEach(function (fullPath) {

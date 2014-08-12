@@ -26,8 +26,9 @@
             }
         }
 
-        Bifrost.assetsManager.initialize();
-        paths = Bifrost.assetsManager.getScriptPaths();
+        var assetsManager = Bifrost.assetsManager.createWithoutScope();
+        assetsManager.initialize();
+        paths = assetsManager.getScriptPaths();
     });
 
     afterEach(function () {

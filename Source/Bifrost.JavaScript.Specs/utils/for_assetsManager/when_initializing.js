@@ -9,12 +9,12 @@ describe("when initializing", function () {
             extension = parameters.extension;
         });
 
-        Bifrost.assetsManager.initialize();
+        var assetsManager = Bifrost.assetsManager.createWithoutScope();
+        assetsManager.initialize();
     });
 
     afterEach(function () {
         $.get.restore();
-        Bifrost.assetsManager.scripts = undefined;
     });
 
     it("should call server to get assets", function () {

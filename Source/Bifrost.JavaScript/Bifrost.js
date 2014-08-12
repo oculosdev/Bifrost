@@ -21,7 +21,6 @@
 @depends utils/isFunction.js
 @depends utils/isType.js
 @depends utils/functionParser.js
-@depends utils/assetsManager.js
 @depends utils/dependencyResolver.js
 @depends utils/dependencyResolvers.js
 @depends utils/defaultDependencyResolver.js
@@ -49,6 +48,7 @@
 @depends utils/areEqual.js
 @depends utils/deepClone.js
 @depends utils/systemClock.js
+@depends utils/assetsManager.js
 @depends TimeSpan.js
 @depends Event.js
 @depends systemEvents.js

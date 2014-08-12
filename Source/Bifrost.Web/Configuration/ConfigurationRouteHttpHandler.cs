@@ -128,7 +128,7 @@ namespace Bifrost.Web.Configuration
 
             var files = assetsManager.GetFilesForExtension("js");
             var serialized = JsonConvert.SerializeObject(files);
-            builder.AppendFormat("Bifrost.assetsManager.initializeFromAssets({0});", serialized);
+            builder.AppendFormat("Bifrost.assetsManager.create().initializeFromAssets({0});", serialized);
             _configurationAsString = builder.ToString();
         }
     }
