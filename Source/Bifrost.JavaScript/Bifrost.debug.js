@@ -2338,6 +2338,9 @@ Bifrost.namespace("Bifrost", {
         
         var self = this;
         this.scripts = [];
+        this.pages = [];
+
+
         this.initialize = function () {
             var promise = Bifrost.execution.Promise.create();
             if (typeof self.scripts === "undefined" ||
@@ -2346,7 +2349,12 @@ Bifrost.namespace("Bifrost", {
                 server.get("/Bifrost/AssetsManager", { extension: "js" }).continueWith(function (result) {
                     self.scripts = result;
                     Bifrost.namespaces.create().initialize();
-                    promise.signal();
+
+                    server.get("/Bifrost/AssetsManager", { extension: "html" }).continueWith(function (result) {
+                        self.pages = result;
+
+                        promise.signal();
+                    });
                 });
             } else {
                 promise.signal();
@@ -2354,8 +2362,19 @@ Bifrost.namespace("Bifrost", {
             return promise;
         };
 
-        this.initializeFromAssets = function(assets) {
-            self.scripts = assets;
+        this.initializeFromAssets = function (assets) {
+            assets.forEach(function (asset) {
+                var path = Bifrost.Path.create({ fullPath: asset });
+                var extension = path.extension.toLowerCase();
+                if (extension == ".js") {
+                    self.scripts.push(asset);
+                }
+                if (extension == ".html") {
+                    self.pages.push(asset);
+                }
+            });
+
+            //self.scripts = assets;
             Bifrost.namespaces.create().initialize();
         };
 

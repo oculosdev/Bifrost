@@ -17,6 +17,7 @@
 //
 #endregion
 using System;
+using System.Collections.Generic;
 using System.Text;
 using System.Web;
 using Bifrost.Configuration;
@@ -126,7 +127,10 @@ namespace Bifrost.Web.Configuration
 
             builder.Append(proxies.All);
 
-            var files = assetsManager.GetFilesForExtension("js");
+            var files = new List<string>();
+            files.AddRange(assetsManager.GetFilesForExtension("js"));
+            files.AddRange(assetsManager.GetFilesForExtension("html"));
+
             var serialized = JsonConvert.SerializeObject(files);
             builder.AppendFormat("Bifrost.assetsManager.create().initializeFromAssets({0});", serialized);
             _configurationAsString = builder.ToString();
