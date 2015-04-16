@@ -203,5 +203,24 @@ namespace Bifrost.Execution
         /// <param name="service">Service to bind</param>
         /// <param name="instance">Instance to bind to</param>
         void Bind(Type service, object instance);
+
+        /// <summary>
+        /// Unbind a service
+        /// </summary>
+        /// <typeparam name="T">Service to unbind</typeparam>
+        void Unbind<T>();
+
+        /// <summary>
+        /// Unbind a service
+        /// </summary>
+        /// <param name="type">Service to unbind</param>
+        void Unbind(Type type);
+
+        /// <summary>
+        /// Gets the binding for a specific service
+        /// </summary>
+        /// <param name="type">Service to get binding for</param>
+        /// <returns></returns>
+        Binding GetBindingFor(Type type);
     }
 }

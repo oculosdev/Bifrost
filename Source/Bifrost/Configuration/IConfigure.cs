@@ -20,6 +20,7 @@ using System;
 using System.Globalization;
 using System.Reflection;
 using Bifrost.Configuration.Assemblies;
+using Bifrost.Diagnostics;
 using Bifrost.Execution;
 
 namespace Bifrost.Configuration
@@ -106,6 +107,11 @@ namespace Bifrost.Configuration
         /// Gets the configuration for security
         /// </summary>
         ISecurityConfiguration Security { get; }
+
+        /// <summary>
+        /// Gets the configuration for telemetry
+        /// </summary>
+        ITelemetryConfiguration Telemetry { get; }
 
         /// <summary>
         /// Gets the configuration for assemblies and how they are treated

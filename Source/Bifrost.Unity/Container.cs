@@ -179,5 +179,21 @@ namespace Bifrost.Unity
         }
 
         public BindingLifecycle DefaultLifecycle { get; set; }
+
+
+        public void Unbind<T>()
+        {
+            throw new NotImplementedException();
+        }
+
+        public void Unbind(Type type)
+        {
+            throw new NotImplementedException();
+        }
+
+        public Binding GetBindingFor(Type type)
+        {
+            throw new NotImplementedException();
+        }
     }
 }

@@ -17,6 +17,9 @@
 //
 #endregion
 
+#if(!SILVERLIGHT)
+using Bifrost.Aspects;
+#endif
 using Bifrost.Execution;
 
 namespace Bifrost.Configuration.Defaults
@@ -41,6 +44,9 @@ namespace Bifrost.Configuration.Defaults
 		public void Initialize()
         {
             var conventionManager = _container.Get<IBindingConventionManager>();
+#if(!SILVERLIGHT)
+            conventionManager.Add<AspectsBindingConvention>();
+#endif
             conventionManager.Add<DefaultConvention>();
             conventionManager.DiscoverAndInitialize();
 		}

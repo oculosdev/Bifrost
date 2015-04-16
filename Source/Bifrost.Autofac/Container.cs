@@ -191,6 +191,21 @@ namespace Bifrost.Autofac
             RegisterWithCallback(service, resolveCallback, DefaultLifecycle);
         }
 
+        public void Unbind<T>()
+        {
+            throw new NotImplementedException();
+        }
+
+        public void Unbind(Type type)
+        {
+            throw new NotImplementedException();
+        }
+
+        public Binding GetBindingFor(Type type)
+        {
+            throw new NotImplementedException();
+        }
+
         public BindingLifecycle DefaultLifecycle { get; set; }
 
 #pragma warning restore 1591
@@ -256,5 +271,7 @@ namespace Bifrost.Autofac
             }
             throw new MissingDefaultConstructorException(type);
         }
+
+
     }
 }

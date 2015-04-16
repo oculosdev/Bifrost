@@ -160,5 +160,19 @@ namespace Bifrost.SimpleInjector
             _container.Register(service, () => instance);
         }
 
+        public void Unbind<T>()
+        {
+            throw new System.NotImplementedException();
+        }
+
+        public void Unbind(System.Type type)
+        {
+            throw new System.NotImplementedException();
+        }
+
+        public Binding GetBindingFor(System.Type type)
+        {
+            throw new System.NotImplementedException();
+        }
     }
 }

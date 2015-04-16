@@ -27,7 +27,7 @@ namespace Bifrost.Concepts
     /// Expresses a Concept as a another type, usually a primitive such as Guid, Int or String
     /// </summary>
     /// <typeparam name="T"></typeparam>
-    public class ConceptAs<T> : IAmValidatable ,IEquatable<ConceptAs<T>> where T : IEquatable<T>
+    public class ConceptAs<T> : IAmConceptAs<T>, IAmValidatable ,IEquatable<ConceptAs<T>> where T : IEquatable<T>
     {
         /// <summary>
         /// The underlying primitive value of this concept

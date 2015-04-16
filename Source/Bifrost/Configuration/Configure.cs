@@ -40,6 +40,7 @@ using Bifrost.Execution;
 using Bifrost.Extensions;
 using Bifrost.Diagnostics;
 using Bifrost.Configuration.Assemblies;
+using Bifrost.Insight;
 
 
 
@@ -72,7 +73,7 @@ namespace Bifrost.Configuration
 
             defaultBindings.Initialize(Container);
             defaultConventions.Initialize();
-            
+
             InitializeProperties();
         }
 
@@ -189,6 +190,7 @@ namespace Bifrost.Configuration
         public ICallContextConfiguration CallContext { get; private set; }
         public IExecutionContextConfiguration ExecutionContext { get; private set; }
         public ISecurityConfiguration Security { get; private set; }
+        public ITelemetryConfiguration Telemetry { get; private set; }
         public AssembliesConfiguration Assemblies { get; private set; }
         public IQualityAssurance QualityAssurance { get; private set; }
 		public CultureInfo Culture { get; set; }
@@ -216,7 +218,8 @@ namespace Bifrost.Configuration
                 () => CallContext.Initialize(Container),
                 () => ExecutionContext.Initialize(Container),
                 () => Security.Initialize(Container),
-                () => DefaultStorage.Initialize(Container)
+                () => DefaultStorage.Initialize(Container),
+                () => Telemetry.Initialize(Container)
             };
 
 #if(SILVERLIGHT)
@@ -243,6 +246,7 @@ namespace Bifrost.Configuration
             CallContext = Container.Get<ICallContextConfiguration>();
             ExecutionContext = Container.Get<IExecutionContextConfiguration>();
             Security = Container.Get<ISecurityConfiguration>();
+            Telemetry = Container.Get<ITelemetryConfiguration>();
             QualityAssurance = Container.Get<IQualityAssurance>();
         }
 

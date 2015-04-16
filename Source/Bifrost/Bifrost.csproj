@@ -54,6 +54,9 @@
     <Compile Include="..\Common\CommonAssemblyInfo.cs">
       <Link>Properties\CommonAssemblyInfo.cs</Link>
     </Compile>
+    <Compile Include="Aspects\AspectsProxyGenerator.cs" />
+    <Compile Include="Aspects\IAspectsProxyGenerator.cs" />
+    <Compile Include="Aspects\IHaveAspects.cs" />
     <Compile Include="CodeGeneration\CodeGenerator.cs" />
     <Compile Include="CodeGeneration\CodeWriter.cs" />
     <Compile Include="CodeGeneration\ICodeGenerator.cs" />
@@ -114,11 +117,16 @@
     <Compile Include="Commands\ICommandContextFactory.cs" />
     <Compile Include="Commands\ICommandSecurityManager.cs" />
     <Compile Include="Commands\ICommandValidators.cs" />
+    <Compile Include="Aspects\AspectsBindingConvention.cs" />
+    <Compile Include="Commands\Insight\CommandOccurrence.cs" />
+    <Compile Include="Commands\Insight\HandleCommand.cs" />
+    <Compile Include="Commands\Insight\TelemetryAspectsForCommandCoordinator.cs" />
     <Compile Include="Commands\TypeDiscovererExtensions.cs" />
     <Compile Include="Concepts\ConceptAs.cs" />
     <Compile Include="Concepts\ConceptExtensions.cs" />
     <Compile Include="Concepts\ConceptFactory.cs" />
     <Compile Include="Concepts\ConceptMap.cs" />
+    <Compile Include="Concepts\IAmConceptAs.cs" />
     <Compile Include="Concepts\Value.cs" />
     <Compile Include="Concurrency\IScheduler.cs" />
     <Compile Include="Concurrency\Scheduler.cs" />
@@ -147,7 +155,9 @@
     <Compile Include="Configuration\IHaveStorage.cs" />
     <Compile Include="Configuration\ISecurityConfiguration.cs" />
     <Compile Include="Configuration\ITasksConfiguration.cs" />
+    <Compile Include="Configuration\ITelemetryConfiguration.cs" />
     <Compile Include="Configuration\IWantToKnowWhenConfigurationIsDone.cs" />
+    <Compile Include="Configuration\TelemetryConfiguration.cs" />
     <Compile Include="Entities\Files\Document.cs" />
     <Compile Include="Entities\Files\Mapping\DocumentMapFor.cs" />
     <Compile Include="Entities\Files\Mapping\KeyStrategy.cs" />
@@ -155,12 +165,19 @@
     <Compile Include="Execution\AssemblyDetails.cs" />
     <Compile Include="Execution\AssemblyFilters.cs" />
     <Compile Include="Execution\AssemblyProvider.cs" />
+    <Compile Include="Aspects\IAspectsFor.cs" />
     <Compile Include="Execution\IAssemblyProvider.cs" />
+    <Compile Include="Execution\Binding.cs" />
     <Compile Include="Execution\ICanFilterAssembly.cs" />
     <Compile Include="Execution\IAssemblyFilters.cs" />
+    <Compile Include="Aspects\IInvocation.cs" />
     <Compile Include="Execution\InvalidSignatureException.cs" />
     <Compile Include="Execution\CannotInvokeMethodBecauseTargetIsNotAlive.cs" />
     <Compile Include="Execution\WeakDelegate.cs" />
+    <Compile Include="Insight\IMeasurement.cs" />
+    <Compile Include="Insight\IOccurrence.cs" />
+    <Compile Include="Insight\ITelemetry.cs" />
+    <Compile Include="Insight\NullTelemetry.cs" />
     <Compile Include="Mapping\SourcePropertyMappingStrategy.cs" />
     <Compile Include="MissingDefaultConstructorException.cs" />
     <Compile Include="Configuration\MultiplePrincipalResolversFound.cs" />
@@ -313,6 +330,8 @@
     <Compile Include="Read\Validation\QueryValidationDescriptors.cs" />
     <Compile Include="Read\Validation\QueryValidationResult.cs" />
     <Compile Include="Read\Validation\QueryValidator.cs" />
+    <Compile Include="Reflection\IProxying.cs" />
+    <Compile Include="Reflection\Proxying.cs" />
     <Compile Include="Rules\IRule.cs" />
     <Compile Include="Rules\IRuleBuilder.cs" />
     <Compile Include="Rules\IRuleContext.cs" />

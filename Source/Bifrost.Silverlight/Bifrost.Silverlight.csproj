@@ -152,6 +152,9 @@
     <Compile Include="..\Bifrost\Concepts\ConceptFactory.cs">
       <Link>Concepts\ConceptFactory.cs</Link>
     </Compile>
+    <Compile Include="..\Bifrost\Concepts\IAmConceptAs.cs">
+      <Link>Concepts\IAmConceptAs.cs</Link>
+    </Compile>
     <Compile Include="..\Bifrost\Concepts\Value.cs">
       <Link>Concepts\Value.cs</Link>
     </Compile>
@@ -281,6 +284,9 @@
     <Compile Include="..\Bifrost\Configuration\ITasksConfiguration.cs">
       <Link>ITasksConfiguration.cs</Link>
     </Compile>
+    <Compile Include="..\Bifrost\Configuration\ITelemetryConfiguration.cs">
+      <Link>Configuration\ITelemetryConfiguration.cs</Link>
+    </Compile>
     <Compile Include="..\Bifrost\Configuration\IViewsConfiguration.cs">
       <Link>Configuration\IViewsConfiguration.cs</Link>
     </Compile>
@@ -301,6 +307,9 @@
     </Compile>
     <Compile Include="..\Bifrost\Configuration\TasksConfiguration.cs">
       <Link>TasksConfiguration.cs</Link>
+    </Compile>
+    <Compile Include="..\Bifrost\Configuration\TelemetryConfiguration.cs">
+      <Link>Configuration\TelemetryConfiguration.cs</Link>
     </Compile>
     <Compile Include="..\Bifrost\Configuration\ViewsConfiguration.cs">
       <Link>Configuration\ViewsConfiguration.cs</Link>
@@ -551,6 +560,9 @@
     <Compile Include="..\Bifrost\Execution\BaseConvention.cs">
       <Link>Execution\BaseConvention.cs</Link>
     </Compile>
+    <Compile Include="..\Bifrost\Execution\Binding.cs">
+      <Link>Execution\Binding.cs</Link>
+    </Compile>
     <Compile Include="..\Bifrost\Execution\BindingConventionManager.cs">
       <Link>Execution\BindingConventionManager.cs</Link>
     </Compile>
@@ -679,6 +691,18 @@
     </Compile>
     <Compile Include="..\Bifrost\Globalization\Localizer.cs">
       <Link>Globalization\Localizer.cs</Link>
+    </Compile>
+    <Compile Include="..\Bifrost\Insight\IMeasurement.cs">
+      <Link>Insight\IMeasurement.cs</Link>
+    </Compile>
+    <Compile Include="..\Bifrost\Insight\IOccurrence.cs">
+      <Link>Insight\IOccurrence.cs</Link>
+    </Compile>
+    <Compile Include="..\Bifrost\Insight\ITelemetry.cs">
+      <Link>Insight\ITelemetry.cs</Link>
+    </Compile>
+    <Compile Include="..\Bifrost\Insight\NullTelemetry.cs">
+      <Link>Insight\NullTelemetry.cs</Link>
     </Compile>
     <Compile Include="..\Bifrost\MissingDefaultConstructorException.cs">
       <Link>MissingDefaultConstructorException.cs</Link>

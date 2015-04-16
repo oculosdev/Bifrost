@@ -185,6 +185,22 @@ namespace Bifrost.Windsor
             get { return DefaultBindingLifecycle; }
             set { DefaultBindingLifecycle = value; }
         }
+
+
+        public void Unbind<T>()
+        {
+            throw new NotImplementedException();
+        }
+
+        public void Unbind(Type type)
+        {
+            throw new NotImplementedException();
+        }
+
+        public Binding GetBindingFor(Type type)
+        {
+            throw new NotImplementedException();
+        }
     }
 }
 
