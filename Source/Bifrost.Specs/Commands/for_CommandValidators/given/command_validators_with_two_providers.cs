@@ -1,8 +1,7 @@
-﻿using Bifrost.Commands;
-using System.Linq;
+﻿using System.Linq;
+using Bifrost.Commands;
 using Bifrost.Validation;
 using Machine.Specifications;
-using System.ComponentModel.DataAnnotations;
 
 namespace Bifrost.Specs.Commands.for_CommandValidators.given
 {

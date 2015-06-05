@@ -1,5 +1,5 @@
 using System.Collections.Generic;
-using System.ComponentModel.DataAnnotations;
+using Bifrost.Validation;
 using Machine.Specifications;
 
 namespace Bifrost.FluentValidation.Specs.Commands.for_CommandBusinessValidator

@@ -16,14 +16,14 @@
 // limitations under the License.
 //
 #endregion
+using Bifrost.Serialization;
 using System;
 using System.Collections.ObjectModel;
-using System.ComponentModel.DataAnnotations;
 using System.Dynamic;
 using System.Net;
 using System.Text;
 using System.Windows;
-using Bifrost.Serialization;
+using Bifrost.Validation;
 
 namespace Bifrost.Commands
 {

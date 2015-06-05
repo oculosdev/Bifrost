@@ -16,9 +16,6 @@
 // limitations under the License.
 //
 #endregion
-using System.Collections.Generic;
-using System.ComponentModel.DataAnnotations;
-using Bifrost.Sagas;
 
 namespace Bifrost.FluentValidation.Sagas
 {

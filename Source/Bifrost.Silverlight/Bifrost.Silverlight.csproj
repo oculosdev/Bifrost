@@ -61,10 +61,6 @@
       <HintPath>..\..\..\..\Program Files\Microsoft SDKs\Silverlight\v5.0\Libraries\Client\Microsoft.CSharp.dll</HintPath>
     </Reference>
     <Reference Include="mscorlib" />
-    <Reference Include="System.ComponentModel.DataAnnotations, Version=5.0.5.0, Culture=neutral, PublicKeyToken=ddd0da4d3e678217, processorArchitecture=MSIL">
-      <SpecificVersion>False</SpecificVersion>
-      <HintPath>..\..\..\..\Program Files\Microsoft SDKs\Silverlight\v5.0\Libraries\Client\System.ComponentModel.DataAnnotations.dll</HintPath>
-    </Reference>
     <Reference Include="System.ServiceModel" />
     <Reference Include="System.Windows" />
     <Reference Include="system" />
@@ -979,6 +975,9 @@
     </Compile>
     <Compile Include="..\Bifrost\Validation\ICanValidate.cs">
       <Link>Validation\ICanValidate.cs</Link>
+    </Compile>
+    <Compile Include="..\Bifrost\Validation\ValidationResult.cs">
+      <Link>Validation\ValidationResult.cs</Link>
     </Compile>
     <Compile Include="..\Bifrost\Views\IHaveId.cs">
       <Link>Views\IHaveId.cs</Link>

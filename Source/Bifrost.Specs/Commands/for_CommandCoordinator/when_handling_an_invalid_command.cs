@@ -1,7 +1,6 @@
-using System.ComponentModel.DataAnnotations;
 using Bifrost.Commands;
-using Machine.Specifications;
 using Bifrost.Validation;
+using Machine.Specifications;
 
 namespace Bifrost.Specs.Commands.for_CommandCoordinator
 {

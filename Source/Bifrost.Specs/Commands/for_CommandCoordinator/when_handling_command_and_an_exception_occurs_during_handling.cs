@@ -1,9 +1,8 @@
-﻿using System;
-using System.ComponentModel.DataAnnotations;
-using Bifrost.Commands;
-using Machine.Specifications;
-using It = Machine.Specifications.It;
+﻿using Bifrost.Commands;
 using Bifrost.Validation;
+using Machine.Specifications;
+using System;
+using It = Machine.Specifications.It;
 
 namespace Bifrost.Specs.Commands.for_CommandCoordinator
 {

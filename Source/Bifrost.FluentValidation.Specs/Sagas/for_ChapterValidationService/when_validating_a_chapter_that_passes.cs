@@ -1,5 +1,4 @@
 using System.Collections.Generic;
-using System.ComponentModel.DataAnnotations;
 using Bifrost.FluentValidation.Sagas;
 using Bifrost.Sagas;
 using Bifrost.Validation;

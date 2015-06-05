@@ -46,7 +46,6 @@
   </PropertyGroup>
   <ItemGroup>
     <Reference Include="System" />
-    <Reference Include="System.ComponentModel.DataAnnotations" />
     <Reference Include="System.Core" />
     <Reference Include="Microsoft.CSharp" />
   </ItemGroup>
@@ -498,6 +497,7 @@
     <Compile Include="Validation\Rules\GreaterThanOrEqual.cs" />
     <Compile Include="Validation\Rules\GreaterThan.cs" />
     <Compile Include="Validation\Rules\Email.cs" />
+    <Compile Include="Validation\ValidationResult.cs" />
     <Compile Include="Validation\ValidationRules.cs" />
     <Compile Include="Validation\ValueRule.cs" />
     <Compile Include="Validation\ValueTypeMismatch.cs" />
