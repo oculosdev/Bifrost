@@ -15,6 +15,7 @@
 		}());
 
 		var uri = Bifrost.Uri.create(scriptSource);
+
         if (window.location.protocol === "file:") {
             this.origin = window.location.href;
             this.origin = this.origin.substr(0, this.origin.lastIndexOf("/"));
