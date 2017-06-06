@@ -2,7 +2,6 @@
  *  Copyright (c) 2008-2017 Dolittle. All rights reserved.
  *  Licensed under the MIT License. See LICENSE in the project root for license information.
  *--------------------------------------------------------------------------------------------*/
-using System;
 using System.Linq;
 using System.Reflection;
 using Bifrost.Concepts;
@@ -12,7 +11,10 @@ using Bifrost.Mapping;
 using Microsoft.Azure.Documents;
 using Microsoft.Azure.Documents.Client;
 using Newtonsoft.Json;
+<<<<<<< HEAD
 using Newtonsoft.Json.Serialization;
+=======
+>>>>>>> master
 using System.Runtime.Serialization.Formatters;
 using System.IO;
 
