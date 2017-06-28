@@ -4,8 +4,7 @@
 		var self = this;
 
 		var scriptSource = (function () {
-			var scripts = document.getElementsByTagName('script'),
-				script = scripts[scripts.length - 1];
+			var script = $("script[src*='Bifrost/Application']").get(0);
 
 			if (script.getAttribute.length !== undefined) {
 				return script.src;
