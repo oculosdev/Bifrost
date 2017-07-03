@@ -14,18 +14,18 @@ namespace Bifrost.Events.Azure.ServiceBus
     /// <summary>
     /// Represents an implementation of <see cref="ICanSendCommittedEventStream"/> for Azure ServiceBus
     /// </summary>
-    public class CommittedEventStreamSender : ICanSendCommittedEventStream
+    public class CommittedEventStreamQueueSender : ICanSendCommittedEventStream
     {
         readonly ISerializer _serializer;
         readonly string _connectionString;
         readonly IQueueClient _queueClient;
 
         /// <summary>
-        /// Initializes a new instance of <see cref="CommittedEventStreamSender"/>
+        /// Initializes a new instance of <see cref="CommittedEventStreamQueueSender"/>
         /// </summary>
         /// <param name="serializer"><see cref="ISerializer"/> used for serializing messages</param>
         /// <param name="connectionStringProvider"><see cref="ICanProvideConnectionStringToSender">Provider</see> for connectionstring</param>
-        public CommittedEventStreamSender(ICanProvideConnectionStringToSender connectionStringProvider, ISerializer serializer)
+        public CommittedEventStreamQueueSender(ICanProvideConnectionStringToSender connectionStringProvider, ISerializer serializer)
         {
             _serializer = serializer;
             _connectionString = connectionStringProvider();

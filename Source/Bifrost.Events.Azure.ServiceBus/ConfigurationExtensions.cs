@@ -20,22 +20,37 @@ namespace Bifrost.Events
         /// <returns>Chained <see cref="CommittedEventStreamReceiverConfiguration"/></returns>
         public static CommittedEventStreamSenderConfiguration UsingServiceBus(this CommittedEventStreamSenderConfiguration configuration, string connectionString)
         {
-            configuration.CommittedEventStreamSender = typeof(CommittedEventStreamSender);
+            configuration.CommittedEventStreamSender = typeof(CommittedEventStreamQueueSender);
             Configure.Instance.Container.Bind<ICanProvideConnectionStringToSender>(() => connectionString);
             return configuration;
         }
 
 
         /// <summary>
-        /// Configure <see cref="ICanReceiveCommittedEventStream"/> using RabbitMQ
+        /// Configure <see cref="ICanReceiveCommittedEventStream"/> using Azure Service Bus
         /// </summary>
         /// <param name="configuration"><see cref="CommittedEventStreamReceiverConfiguration"/> to configure</param>
         /// <param name="connectionString">ConnectionString to connect with</param>
         /// <returns>Chained <see cref="CommittedEventStreamReceiverConfiguration"/></returns>
-        public static CommittedEventStreamReceiverConfiguration UsingServiceBus(this CommittedEventStreamReceiverConfiguration configuration, string connectionString)
+        public static CommittedEventStreamReceiverConfiguration UsingServiceBusQueues(this CommittedEventStreamReceiverConfiguration configuration, string connectionString)
         {
-            configuration.CommittedEventStreamReceiver = typeof(CommittedEventStreamReceiver);
+            configuration.CommittedEventStreamReceiver = typeof(CommittedEventStreamQueueReceiver);
             Configure.Instance.Container.Bind<ICanProvideConnectionStringToReceiver>(() => connectionString);
+            return configuration;
+        }
+
+        /// <summary>
+        /// Configure <see cref="ICanReceiveCommittedEventStream"/> using Azure Service Bus
+        /// </summary>
+        /// <param name="configuration"><see cref="CommittedEventStreamReceiverConfiguration"/> to configure</param>
+        /// <param name="connectionString">ConnectionString to connect with</param>
+        /// <param name="topicProvider">Topic provider</param>
+        /// <returns>Chained <see cref="CommittedEventStreamReceiverConfiguration"/></returns>
+        public static CommittedEventStreamReceiverConfiguration UsingServiceBusSubscriptions(this CommittedEventStreamReceiverConfiguration configuration, string connectionString, ICanProvideSubscriptionTopics topicProvider)
+        {
+            configuration.CommittedEventStreamReceiver = typeof(CommittedEventStreamSubscriptionReceiver);
+            Configure.Instance.Container.Bind<ICanProvideConnectionStringToReceiver>(() => connectionString);
+            Configure.Instance.Container.Bind<ICanProvideSubscriptionTopics>(() => topicProvider);
             return configuration;
         }
     }

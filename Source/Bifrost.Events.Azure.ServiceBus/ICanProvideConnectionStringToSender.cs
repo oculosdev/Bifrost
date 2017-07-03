@@ -5,7 +5,7 @@
 namespace Bifrost.Events.Azure.ServiceBus
 {
     /// <summary>
-    /// Defines something that can provide a connection string for Redis
+    /// Defines something that can provide a connection string for Azure Service Bus
     /// </summary>
     public delegate string ICanProvideConnectionStringToSender();
 }
