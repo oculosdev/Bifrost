@@ -1,6 +1,26 @@
 ﻿Bifrost.namespace("Bifrost.read", {
     QueryTask: Bifrost.tasks.LoadTask.extend(function (query, paging, taskFactory) {
-        var url = "/Bifrost/Query/Execute?_q=" + query._generatedFrom;
+        var scriptSource = (function () {
+            var script = $("script[src*='Bifrost/Application']").get(0);
+
+            if (script.getAttribute.length !== undefined) {
+                return script.src;
+            }
+
+            return script.getAttribute('src', -1);
+        }());
+
+        var uri = Bifrost.Uri.create(scriptSource);
+
+        var port = uri.port || "";
+        if (!Bifrost.isUndefined(port) && port !== "" && port !== 80) {
+            port = ":" + port;
+        }
+
+        this.origin = uri.scheme + "://" + uri.host + port;
+
+        var url = this.origin + "/Bifrost/Query/Execute?_q=" + query._generatedFrom;
+
         var payload = {
             descriptor: {
                 nameOfQuery: query._name,
