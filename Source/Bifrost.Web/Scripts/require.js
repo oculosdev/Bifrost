@@ -1,4 +1,4 @@
-/*
+﻿/*
  RequireJS 1.0.3 Copyright (c) 2010-2011, The Dojo Foundation All Rights Reserved.
  Available via the MIT or new BSD license.
  see: http://github.com/jrburke/requirejs for details
@@ -29,3 +29,13 @@ null,a=c.getAttribute("data-requirecontext"),h=c.getAttribute("data-requiremodul
 c.contextName),o.setAttribute("data-requiremodule",h),o.attachEvent&&!da?(O=!0,n?o.onreadystatechange=function(){if(o.readyState==="loaded")o.onreadystatechange=null,o.attachEvent("onreadystatechange",k),n(o)}:o.attachEvent("onreadystatechange",k)):o.addEventListener("load",k,!1),o.src=a,n||d.addScriptToDom(o),o;else ca&&(importScripts(a),c.completeLoad(h));return null};if(G){u=document.getElementsByTagName("script");for(H=u.length-1;H>-1&&(y=u[H]);H--){if(!t)t=y.parentNode;if(z=y.getAttribute("data-main")){if(!r.baseUrl)u=
 z.split("/"),y=u.pop(),u=u.length?u.join("/")+"/":"./",r.baseUrl=u,z=y.replace(aa,"");r.deps=r.deps?r.deps.concat(z):[z];break}}}d.checkReadyState=function(){var a=v.contexts,c;for(c in a)if(!(c in K)&&a[c].waitCount)return;d.resourcesReady(!0)};d.resourcesReady=function(a){var c,h;d.resourcesDone=a;if(d.resourcesDone)for(h in a=v.contexts,a)if(!(h in K)&&(c=a[h],c.jQueryIncremented))U(c.jQuery,!1),c.jQueryIncremented=!1};d.pageLoaded=function(){if(document.readyState!=="complete")document.readyState=
 "complete"};if(G&&document.addEventListener&&!document.readyState)document.readyState="loading",window.addEventListener("load",d.pageLoaded,!1);d(r);if(d.isAsync&&typeof setTimeout!=="undefined")A=v.contexts[r.context||"_"],A.requireWait=!0,setTimeout(function(){A.requireWait=!1;A.takeGlobalQueue();A.scriptCount||A.resume();d.checkReadyState()},0)}})();
+
+require.config({
+    text: {
+        useXhr: function (url, protocol, hostname, port) {
+            // allow cross-domain requests
+            // remote server allows CORS
+            return true;
+        }
+    }
+});
