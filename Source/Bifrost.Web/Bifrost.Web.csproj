@@ -34,6 +34,23 @@
   </Target>
 
   <ItemGroup>
+    <None Remove="Scripts\Bifrost.debug.js" />
+    <None Remove="Scripts\domReady.js" />
+    <None Remove="Scripts\jquery-2.1.3.intellisense.js" />
+    <None Remove="Scripts\jquery-2.1.3.js" />
+    <None Remove="Scripts\jquery-2.1.3.min.js" />
+    <None Remove="Scripts\jquery-2.1.3.min.map" />
+    <None Remove="Scripts\jquery.history.js" />
+    <None Remove="Scripts\jquery.signalR-2.2.0.js" />
+    <None Remove="Scripts\jquery.signalR-2.2.0.min.js" />
+    <None Remove="Scripts\knockout-3.2.0.debug.js" />
+    <None Remove="Scripts\knockout-3.2.0.js" />
+    <None Remove="Scripts\noext.js" />
+    <None Remove="Scripts\order.js" />
+    <None Remove="Scripts\text.js" />
+  </ItemGroup>
+
+  <ItemGroup>
     <None Update="**\*.cs">
       <PackagePath>src/</PackagePath>
       <Pack>true</Pack>
@@ -56,7 +73,21 @@
   </ItemGroup>
 
   <ItemGroup>
-    <EmbeddedResource Include="Visualizer\**\*;Styles\**\*;Scripts\**\*;img\**\*;font\**\*;css\**\*" Exclude="bin\**;obj\**;**\*.xproj;packages\**;@(EmbeddedResource)" />
+    <EmbeddedResource Include="Scripts\Bifrost.debug.js" />
+    <EmbeddedResource Include="Scripts\domReady.js" />
+    <EmbeddedResource Include="Scripts\jquery-2.1.3.intellisense.js" />
+    <EmbeddedResource Include="Scripts\jquery-2.1.3.js" />
+    <EmbeddedResource Include="Scripts\jquery-2.1.3.min.js" />
+    <EmbeddedResource Include="Scripts\jquery-2.1.3.min.map" />
+    <EmbeddedResource Include="Scripts\jquery.history.js" />
+    <EmbeddedResource Include="Scripts\jquery.signalR-2.2.0.js" />
+    <EmbeddedResource Include="Scripts\jquery.signalR-2.2.0.min.js" />
+    <EmbeddedResource Include="Scripts\knockout-3.2.0.debug.js" />
+    <EmbeddedResource Include="Scripts\knockout-3.2.0.js" />
+    <EmbeddedResource Include="Scripts\noext.js" />
+    <EmbeddedResource Include="Scripts\order.js" />
+    <EmbeddedResource Include="Scripts\require.js" Exclude="bin\**;obj\**;**\*.xproj;packages\**;@(EmbeddedResource)" />
+    <EmbeddedResource Include="Scripts\text.js" />
 
     <None Update="**\*.cs">
       <PackagePath>src/</PackagePath>

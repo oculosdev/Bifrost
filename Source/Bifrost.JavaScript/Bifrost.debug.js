@@ -2966,8 +2966,7 @@ Bifrost.namespace("Bifrost.io", {
 		var self = this;
 
 		var scriptSource = (function () {
-			var scripts = document.getElementsByTagName('script'),
-				script = scripts[scripts.length - 1];
+			var script = $("script[src*='Bifrost/Application']").get(0);
 
 			if (script.getAttribute.length !== undefined) {
 				return script.src;
@@ -4147,7 +4146,28 @@ if (typeof ko !== 'undefined') {
 Bifrost.namespace("Bifrost.commands", {
     HandleCommandTask: Bifrost.tasks.ExecutionTask.extend(function (command, server, systemEvents) {
         /// <summary>Represents a task that can handle a command</summary>
+        var self = this;
+
         this.name = command.name;
+
+        var scriptSource = (function () {
+            var script = $("script[src*='Bifrost/Application']").get(0);
+
+            if (script.getAttribute.length !== undefined) {
+                return script.src;
+            }
+
+            return script.getAttribute('src', -1);
+        }());
+
+		var uri = Bifrost.Uri.create(scriptSource);
+
+		var port = uri.port || "";
+		if (!Bifrost.isUndefined(port) && port !== "" && port !== 80) {
+			port = ":" + port;
+		}
+
+		this.origin = uri.scheme + "://" + uri.host + port;
 
         this.execute = function () {
             var promise = Bifrost.execution.Promise.create();
@@ -4157,7 +4177,7 @@ Bifrost.namespace("Bifrost.commands", {
                 commandDescriptor: commandDescriptor
             };
 
-            var url = "/Bifrost/CommandCoordinator/Handle?_cmd=" + command._generatedFrom;
+			var url = self.origin + "/Bifrost/CommandCoordinator/Handle?_cmd=" + command._generatedFrom;
 
             server.post(url, parameters).continueWith(function (result) {
                 var commandResult = Bifrost.commands.CommandResult.createFrom(result);
@@ -4187,6 +4207,25 @@ Bifrost.namespace("Bifrost.commands", {
         /// <summary>Represents a task that can handle an array of command</summary>
         var self = this;
 
+        var scriptSource = (function () {
+            var script = $("script[src*='Bifrost/Application']").get(0);
+
+            if (script.getAttribute.length !== undefined) {
+                return script.src;
+            }
+
+            return script.getAttribute('src', -1);
+        }());
+
+		var uri = Bifrost.Uri.create(scriptSource);
+
+		var port = uri.port || "";
+		if (!Bifrost.isUndefined(port) && port !== "" && port !== 80) {
+			port = ":" + port;
+		}
+
+		this.origin = uri.scheme + "://" + uri.host + port;
+        
         this.names = [];
         commands.forEach(function (command) {
             self.names.push(command.name);
@@ -4207,7 +4246,7 @@ Bifrost.namespace("Bifrost.commands", {
                 commandDescriptors: commandDescriptors
             };
 
-            var url = "/Bifrost/CommandCoordinator/HandleMany";
+            var url = self.origin + "/Bifrost/CommandCoordinator/HandleMany";
 
             server.post(url, parameters).continueWith(function (results) {
                 var commandResults = [];
@@ -6056,7 +6095,27 @@ Bifrost.dependencyResolvers.query = {
 };
 Bifrost.namespace("Bifrost.read", {
     QueryTask: Bifrost.tasks.LoadTask.extend(function (query, paging, taskFactory) {
-        var url = "/Bifrost/Query/Execute?_q=" + query._generatedFrom;
+        var scriptSource = (function () {
+            var script = $("script[src*='Bifrost/Application']").get(0);
+
+            if (script.getAttribute.length !== undefined) {
+                return script.src;
+            }
+
+            return script.getAttribute('src', -1);
+        }());
+
+        var uri = Bifrost.Uri.create(scriptSource);
+
+        var port = uri.port || "";
+        if (!Bifrost.isUndefined(port) && port !== "" && port !== 80) {
+            port = ":" + port;
+        }
+
+        this.origin = uri.scheme + "://" + uri.host + port;
+
+        var url = this.origin + "/Bifrost/Query/Execute?_q=" + query._generatedFrom;
+
         var payload = {
             descriptor: {
                 nameOfQuery: query._name,
