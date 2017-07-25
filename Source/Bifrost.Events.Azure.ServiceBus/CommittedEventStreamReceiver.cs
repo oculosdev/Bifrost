@@ -11,6 +11,7 @@ using Bifrost.Applications;
 using Bifrost.Lifecycle;
 using Bifrost.Serialization;
 using Microsoft.Azure.ServiceBus;
+using Microsoft.Azure.ServiceBus.Primitives;
 
 namespace Bifrost.Events.Azure.ServiceBus
 {
@@ -46,10 +47,13 @@ namespace Bifrost.Events.Azure.ServiceBus
 
             var connectionString = connectionStringProvider();
             _queueClient = new QueueClient(connectionString, Constants.QueueName, ReceiveMode.PeekLock);
-            _queueClient.RegisterMessageHandler(Receive);
+            _queueClient.RegisterMessageHandler(Receive, ExceptionReceived);
         }
 
-
+        Task ExceptionReceived(ExceptionReceivedEventArgs ex)
+        {
+            return Task.CompletedTask;
+        }
 
         Task Receive(Message message, CancellationToken token)
         {
